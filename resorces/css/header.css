@@ -1,0 +1,61 @@
+
+#intro-info{
+    display: flex;
+}
+#intro-info-img{
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 60%;
+}
+#intro-info-saluto{
+    margin-left: 10px;
+}
+#intro-cit{
+    margin-top:20px;
+}
+#user-quote{
+    text-align: justify;
+}
+#keywoeds{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.keyword{
+    margin: 20px 0px;
+    background-color: #F6F5FA;
+    border: 1px solid #EFEEF2;
+    border-radius: 25px;
+    padding: 5px 15px 5px 15px;
+    user-select: none;/* Per alcuni browser meno recenti, potrebbero essere necessari i prefissi */
+    -webkit-user-select: none; /* Chrome, Safari */
+    -moz-user-select: none;    /* Firefox */
+    -ms-user-select: none;   /* Edge, Internet Explorer */
+}
+.selected{
+    background-color: black;
+    color: white;
+}
+.info-keyword{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.windows-keyword{
+    background-color: #F6F5FA;
+    border: 1px solid #EFEEF2;
+    border-radius: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+}
+.keyword-title{
+    margin-bottom: 20px;
+}
+.keyword-info{
+    text-align: justify;
+}
