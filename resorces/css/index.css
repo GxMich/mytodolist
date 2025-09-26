@@ -12,3 +12,22 @@ body{
 .hide{
     display: none;
 }
+
+#navbar{
+  display: flex;
+  flex-direction: row;
+  background-color: #F6F5FA;
+  border: 1px solid #EFEEF2;
+  border-radius: 50px;
+  justify-content: space-between;
+  padding: 5px 20px;
+  position: fixed;
+  bottom: 30px;
+  left: 30px;
+  right: 30px;
+}
+.icon{
+  width: 40px;
+}
+#addTask svg{
+}
