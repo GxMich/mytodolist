@@ -13,6 +13,11 @@ body{
     display: none;
 }
 
+.selected{
+    background-color: black !important;
+    color: white !important;
+}
+
 #navbar{
   display: flex;
   flex-direction: row;
@@ -20,14 +25,21 @@ body{
   border: 1px solid #EFEEF2;
   border-radius: 50px;
   justify-content: space-between;
-  padding: 5px 20px;
+  padding: 20px;
   position: fixed;
   bottom: 30px;
   left: 30px;
   right: 30px;
 }
+.navbar-icon{
+  display: flex;
+  border-radius: 100%;
+  width: 60px;
+  height: 60px;
+  justify-content: center;
+  align-items: center;
+}
 .icon{
   width: 40px;
-}
-#addTask svg{
+  height: 40px;
 }

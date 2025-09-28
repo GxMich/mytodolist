@@ -33,10 +33,6 @@
     -moz-user-select: none;    /* Firefox */
     -ms-user-select: none;   /* Edge, Internet Explorer */
 }
-.selected{
-    background-color: black;
-    color: white;
-}
 .info-keyword{
     display: flex;
     flex-direction: column;
