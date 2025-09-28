@@ -1,0 +1,60 @@
+/* Reset semplice */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: system-ui, sans-serif;
+}
+body{
+    margin: 30px;
+}
+
+.hide{
+    display: none;
+}
+
+.selected{
+  background-color: black !important;
+  color: white !important;
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+/* Ombra morbida stile iOS */
+.shadow-1 {
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Card sospesa (Material Design base) */
+.shadow-2 {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+/* Ombra diffusa leggera */
+.shadow-3 {
+  box-shadow: 0 0 30px rgba(0,0,0,0.08);
+}
+
+/* Ombra multipla “profonda” */
+.shadow-4 {
+  box-shadow: 
+    0 4px 6px rgba(0,0,0,0.1),
+    0 8px 20px rgba(0,0,0,0.05);
+}
+
+/* Ombra tipo finestra/macOS */
+.shadow-5 {
+  box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+}
+
+/* Effetto “fluttuante” */
+.shadow-6 {
+  box-shadow: 
+    0 10px 15px rgba(0,0,0,0.1),
+    0 20px 25px rgba(0,0,0,0.05);
+}
+/* Classe per animare la rotazione */
+.rotate-45 {
+  transform: rotate(45deg);
+  transition: transform 0.3s ease-in-out; /* durata e tipo di animazione */
+}
