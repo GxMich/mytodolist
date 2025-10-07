@@ -101,4 +101,13 @@ document.addEventListener('DOMContentLoaded', (event) => {
             }
         });
     });
+    infoKeywords.forEach(info => {
+        info.addEventListener('click', function(e) {
+            if (e.target === this) {
+                this.classList.add('hide');
+                keywords.forEach(k => k.classList.remove('selected'));
+            }
+        });
+    });
+
 });

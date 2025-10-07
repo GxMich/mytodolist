@@ -6,12 +6,16 @@
     <link rel="stylesheet" href="./resorces/css/header.css">
     <link rel="stylesheet" href="./resorces/css/index.css">
     <link rel="stylesheet" href="./resorces/css/generic.css">
+    <link rel="stylesheet" href="./resorces/css/today.css">
+    <link rel="stylesheet" href="./resorces/css/addtask.css">
     <title>My to do list</title>
 </head>
 <body>
-    <script src="./resorces/js/header.js"></script>
-    <script src="./resorces/js/main.js"></script>
-    <script src="./resorces/js/index.js"></script>
+    <script src="./resorces/js/header.js" defer></script>
+    <script src="./resorces/js/main.js" defer></script>
+    <script src="./resorces/js/index.js" defer></script>
+    <script src="./resorces/js/today.js" defer></script>
+    <script src="./resorces/js/addtask.js" defer></script>
     <header>
         <div id="intro">
             <div id="intro-info">
@@ -106,8 +110,101 @@
             </svg>
         </div>
     </div>
-    <div id="test" class="hide">
-        <h1>Lorem ipsum dolor sit amet consectetur adipisicing elit. At ullam modi doloribus, quis facilis aliquid quod dicta minima nihil deleniti adipisci nesciunt magnam ab molestias et impedit repellat cumque consectetur!</h1>
+    <div id="task-form-container" class="hide">
+        <form id="taskForm" class="form-container">
+            <h1>Add My Task</h1>
+
+            <div class="input-group">
+                <input type="text" id="titolo" class="input-field" placeholder="&nbsp;" required>
+                <label for="titolo">Inserisci titolo*</label>
+            </div>
+
+            <div class="select-group">
+                <div class="input-group">
+                    <select id="genere" class="select-field" value="">
+                        <option value="" disabled selected></option>
+                        <option value="lavoro">Lavoro</option>
+                        <option value="personale">Personale</option>
+                        <option value="studio">Studio</option>
+                    </select>
+                    <label for="genere">Genere</label>
+                </div>
+                
+                <div class="input-group">
+                    <select id="tag" class="select-field" value="">
+                        <option value="" disabled selected></option>
+                        <option value="urgente">Urgente</option>
+                        <option value="bassa">Bassa</option>
+                        <option value="media">Media</option>
+                    </select>
+                    <label for="tag">Tag</label>
+                </div>
+            </div>
+            
+            <div class="checkbox-group">
+                <input type="checkbox" id="taskGiornaliera">
+                <label for="taskGiornaliera">Task giornaliera</label>
+            </div>
+            
+            <div class="select-group">
+                <div class="input-group">
+                    <select id="urgenza" class="select-field" value="">
+                        <option value="" disabled selected></option>
+                        <option value="alta">Alta</option>
+                        <option value="media">Media</option>
+                        <option value="bassa">Bassa</option>
+                    </select>
+                    <label for="urgenza">Urgenza</label>
+                </div>
+                
+                <div class="input-group">
+                    <select id="priorita" class="select-field" value="">
+                        <option value="" disabled selected></option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
+                    <label for="priorita">Priorità</label>
+                </div>
+            </div>
+            
+            <p style="margin-bottom: 10px; color: var(--text-dark); font-weight: 600;">Inizio:</p>
+            <div class="time-date-group">
+                <div class="input-group">
+                    <input type="time" id="inizioOra" class="input-field" placeholder="&nbsp;" value="00:00">
+                    <label for="inizioOra">Ora</label>
+                </div>
+                <div class="input-group">
+                    <input type="date" id="inizioData" class="input-field" placeholder="&nbsp;" required>
+                    <label for="inizioData">Data*</label>
+                </div>
+            </div>
+            
+            <div class="checkbox-group">
+                <input type="checkbox" id="inGiornata">
+                <label for="inGiornata">In giornata</label>
+            </div>
+
+            <p style="margin-bottom: 10px; color: var(--text-dark); font-weight: 600;">Fine:</p>
+            <div class="time-date-group">
+                <div class="input-group">
+                    <input type="time" id="fineOra" class="input-field" placeholder="&nbsp;" value="00:00">
+                    <label for="fineOra">Ora</label>
+                </div>
+                <div class="input-group">
+                    <input type="date" id="fineData" class="input-field" placeholder="&nbsp;">
+                    <label for="fineData">Data</label>
+                </div>
+            </div>
+            
+            <div class="input-group">
+                <textarea id="dettagli" placeholder="Inserisci dettagli..."></textarea>
+            </div>
+
+            <button type="submit" class="save-button">
+                Salva Task
+            </button>
+        </form>
     </div>
     <main>
 

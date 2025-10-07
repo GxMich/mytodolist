@@ -20,6 +20,19 @@ body{
   box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
 
+.active{
+  background-color: #f7a233 !important;
+  border: 1px solid rgba(0, 0, 0, 0.062) !important;
+  font-weight: bolder;
+}
+
+.not-select{
+  user-select: none;/* Per alcuni browser meno recenti, potrebbero essere necessari i prefissi */
+  -webkit-user-select: none; /* Chrome, Safari */
+  -moz-user-select: none;    /* Firefox */
+  -ms-user-select: none;   /* Edge, Internet Explorer */
+}
+
 /* Ombra morbida stile iOS */
 .shadow-1 {
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);

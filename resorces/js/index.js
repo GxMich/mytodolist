@@ -17,10 +17,10 @@ document.addEventListener('DOMContentLoaded', (event) => {
     document.getElementById(idMainSelection).classList.add('selected');
     const addTask = document.getElementById('addTask');
     const svgIcon = addTask.querySelector('svg');
-    const test = document.getElementById('test');
+    const task_form_container = document.getElementById('task-form-container');
     addTask.addEventListener('click', () => {
         svgIcon.classList.toggle('rotate-45');
-        test.classList.toggle('hide');
+        task_form_container.classList.toggle('hide');
     });
 
 });

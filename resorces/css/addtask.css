@@ -1,0 +1,133 @@
+#task-form-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 200;
+    color: #1A1A1A;
+    background-color: #f6f5fa;
+    max-width: 460px;
+    width: calc(100% - 60px);
+    padding: 30px 30px;
+    min-height: 300px; 
+    max-height: calc(70vh - 20px); 
+    overflow-y: auto; 
+    border-radius: 16px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); 
+    transition: all 0.3s ease;
+}
+
+h1 {
+    font-weight: 800;
+    font-size: 1.8rem;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.input-group {
+    position: relative;
+    margin-bottom: 15px; 
+}
+
+.input-field, .select-field {
+    width: 100%;
+    padding: 18px 0px 6px 0px; 
+    border: none;
+    border-bottom: 2px solid #E0E0E0;
+    background-color: transparent;
+    color: #1A1A1A;
+    font-size: 1rem;
+    outline: none;
+    transition: border-bottom-color 0.3s;
+    border-radius: 0;
+}
+
+.input-field:focus, .select-field:focus {
+    border-bottom-color: #DDA03D;
+}
+
+.input-field.error, .select-field.error {
+    border-bottom-color: #E53E3E !important;
+}
+
+.input-group label {
+    position: absolute;
+    top: 15px;
+    left: 0px;
+    font-size: 1rem;
+    color: #A0A0A0;
+    pointer-events: none;
+    transition: all 0.2s ease-out;
+    transform-origin: left top;
+}
+
+.input-field:focus ~ label, 
+.input-field:not(:placeholder-shown) ~ label,
+.input-field[type="time"] ~ label, 
+.input-field[type="date"] ~ label,
+.select-field:not([value=""]) ~ label, 
+.select-field:focus ~ label {
+    top: 5px;
+    font-size: 0.75rem;
+    color: #DDA03D;
+    transform: scale(0.9);
+}
+
+.time-date-group,
+.select-group {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px; 
+}
+
+.time-date-group .input-group,
+.select-group .input-group {
+    flex: 1;
+    margin-bottom: 0;
+}
+
+.checkbox-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    font-size: 0.95rem;
+}
+
+.checkbox-group label {
+    margin-left: 3px;
+}
+
+textarea {
+    resize: none;
+    min-height: 120px;
+    padding: 15px;
+    border: 1px solid #E0E0E0;
+    border-radius: 16px;
+    background-color: #FFFFFF;
+    color: #1A1A1A;
+    width: 100%;
+    font-family: inherit;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.save-button {
+    width: 100%;
+    padding: 15px;
+    margin-top: 5px;
+    background-color: #DDA03D;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 16px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s, box-shadow 0.2s;
+    box-shadow: 0 8px 15px rgba(221, 160, 61, 0.4); 
+}
+
+.save-button:hover {
+    background-color: #c88e32;
+    box-shadow: 0 6px 12px rgba(221, 160, 61, 0.3);
+}
