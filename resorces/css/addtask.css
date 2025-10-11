@@ -1,6 +1,6 @@
 #task-form-container {
     position: fixed;
-    top: 50%;
+    top: 45%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 200;
@@ -10,7 +10,7 @@
     width: calc(100% - 60px);
     padding: 30px 30px;
     min-height: 300px; 
-    max-height: calc(70vh - 20px); 
+    max-height: 75vh; 
     overflow-y: auto; 
     border-radius: 16px;
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); 
@@ -65,12 +65,12 @@ h1 {
 .input-field:not(:placeholder-shown) ~ label,
 .input-field[type="time"] ~ label, 
 .input-field[type="date"] ~ label,
-.select-field:not([value=""]) ~ label, 
-.select-field:focus ~ label {
-    top: 5px;
-    font-size: 0.75rem;
-    color: #DDA03D;
-    transform: scale(0.9);
+.select-field:focus ~ label,
+.select-field:valid ~ label {
+  top: 5px;
+  font-size: 0.75rem;
+  color: #DDA03D;
+  transform: scale(0.9);
 }
 
 .time-date-group,
@@ -117,7 +117,7 @@ textarea {
     padding: 15px;
     margin-top: 5px;
     background-color: #DDA03D;
-    color: #FFFFFF;
+    color: #000000;
     border: none;
     border-radius: 16px;
     font-size: 1.1rem;
@@ -128,6 +128,6 @@ textarea {
 }
 
 .save-button:hover {
-    background-color: #c88e32;
+    background-color: #f7a233;
     box-shadow: 0 6px 12px rgba(221, 160, 61, 0.3);
 }

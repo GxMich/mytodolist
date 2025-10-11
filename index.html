@@ -114,41 +114,54 @@
         <form id="taskForm" class="form-container">
             <h1>Add My Task</h1>
 
+            <!-- Titolo -->
             <div class="input-group">
                 <input type="text" id="titolo" class="input-field" placeholder="&nbsp;" required>
                 <label for="titolo">Inserisci titolo*</label>
             </div>
 
+            <!-- Genere, Tag e categoria -->
             <div class="select-group">
                 <div class="input-group">
-                    <select id="genere" class="select-field" value="">
+                    <select id="genere" class="select-field" value="" required>
+                        <option value="" disabled selected></option>
+                        <option value="task">Task</option>
+                        <option value="event">Eventi</option>
+                        <option value="note">Note</option>
+                    </select>
+                    <label for="genere">Genere</label>
+                </div>
+                <div class="input-group task">
+                    <select id="tag" class="select-field" value="" required>
                         <option value="" disabled selected></option>
                         <option value="lavoro">Lavoro</option>
                         <option value="personale">Personale</option>
                         <option value="studio">Studio</option>
                     </select>
-                    <label for="genere">Genere</label>
-                </div>
-                
-                <div class="input-group">
-                    <select id="tag" class="select-field" value="">
-                        <option value="" disabled selected></option>
-                        <option value="urgente">Urgente</option>
-                        <option value="bassa">Bassa</option>
-                        <option value="media">Media</option>
-                    </select>
                     <label for="tag">Tag</label>
                 </div>
+                <div class="input-group input-group-note hide">
+                    <select id="categoria" class="select-field" value="" required>
+                        <option value="" disabled selected></option>
+                        <option value="progetti">Progetti</option>
+                        <option value="idee">Idee</option>
+                        <option value="bussines">Bussines</option>
+                        <option value="obbietivi">Obbietivi</option>
+                    </select>
+                    <label for="categoria">Categoria</label>
+                </div>
             </div>
-            
-            <div class="checkbox-group">
+
+            <!-- Task giornaliera -->
+            <div class="checkbox-group task">
                 <input type="checkbox" id="taskGiornaliera">
                 <label for="taskGiornaliera">Task giornaliera</label>
             </div>
-            
-            <div class="select-group">
+
+            <!-- Urgenza e Priorità -->
+            <div class="select-group task">
                 <div class="input-group">
-                    <select id="urgenza" class="select-field" value="">
+                    <select id="urgenza" class="select-field" value="" required>
                         <option value="" disabled selected></option>
                         <option value="alta">Alta</option>
                         <option value="media">Media</option>
@@ -156,9 +169,8 @@
                     </select>
                     <label for="urgenza">Urgenza</label>
                 </div>
-                
                 <div class="input-group">
-                    <select id="priorita" class="select-field" value="">
+                    <select id="priorita" class="select-field" value="" required>
                         <option value="" disabled selected></option>
                         <option value="1">1</option>
                         <option value="2">2</option>
@@ -167,26 +179,29 @@
                     <label for="priorita">Priorità</label>
                 </div>
             </div>
-            
-            <p style="margin-bottom: 10px; color: var(--text-dark); font-weight: 600;">Inizio:</p>
-            <div class="time-date-group">
-                <div class="input-group">
+
+            <!-- Inizio -->
+            <p class="task" style="margin-bottom: 10px; color: var(--text-dark); font-weight: 600;">Inizio:</p>
+            <div class="time-date-group time-date-group-task task">
+                <div class="input-group input-group-task">
                     <input type="time" id="inizioOra" class="input-field" placeholder="&nbsp;" value="00:00">
                     <label for="inizioOra">Ora</label>
                 </div>
-                <div class="input-group">
-                    <input type="date" id="inizioData" class="input-field" placeholder="&nbsp;" required>
-                    <label for="inizioData">Data*</label>
+                <div class="input-group input-group-task">
+                    <input type="date" id="inizioData" class="input-field" placeholder="&nbsp;">
+                    <label for="inizioData">Data</label>
                 </div>
             </div>
-            
-            <div class="checkbox-group">
+
+            <!-- In giornata -->
+            <div class="checkbox-group task">
                 <input type="checkbox" id="inGiornata">
                 <label for="inGiornata">In giornata</label>
             </div>
 
-            <p style="margin-bottom: 10px; color: var(--text-dark); font-weight: 600;">Fine:</p>
-            <div class="time-date-group">
+            <!-- Fine -->
+            <p class="group-task" style="margin-bottom: 10px; color: var(--text-dark); font-weight: 600;">Fine</p>
+            <div class="time-date-group task">
                 <div class="input-group">
                     <input type="time" id="fineOra" class="input-field" placeholder="&nbsp;" value="00:00">
                     <label for="fineOra">Ora</label>
@@ -196,16 +211,19 @@
                     <label for="fineData">Data</label>
                 </div>
             </div>
-            
+
+            <!-- Dettagli -->
             <div class="input-group">
                 <textarea id="dettagli" placeholder="Inserisci dettagli..."></textarea>
             </div>
 
+            <!-- Bottone Salva -->
             <button type="submit" class="save-button">
-                Salva Task
+                Salva
             </button>
         </form>
     </div>
+
     <main>
 
     </main>
