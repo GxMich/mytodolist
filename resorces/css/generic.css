@@ -33,6 +33,12 @@ body{
   -ms-user-select: none;   /* Edge, Internet Explorer */
 }
 
+.blur-background {
+    filter: blur(10px); /* Applica un blur di 5px */
+    pointer-events: none; /* Impedisce l'interazione con gli elementi sfocati */
+    transition: filter 0.3s ease; /* Transizione fluida per l'effetto blur */
+}
+
 /* Ombra morbida stile iOS */
 .shadow-1 {
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);

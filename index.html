@@ -1,57 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Meta base -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- CSS principali -->
     <link rel="stylesheet" href="./resorces/css/header.css">
     <link rel="stylesheet" href="./resorces/css/index.css">
     <link rel="stylesheet" href="./resorces/css/generic.css">
     <link rel="stylesheet" href="./resorces/css/today.css">
     <link rel="stylesheet" href="./resorces/css/addtask.css">
+
     <title>My to do list</title>
 </head>
 <body>
+
+    <!-- Script JS principali -->
     <script src="./resorces/js/header.js" defer></script>
     <script src="./resorces/js/main.js" defer></script>
     <script src="./resorces/js/index.js" defer></script>
     <script src="./resorces/js/today.js" defer></script>
     <script src="./resorces/js/addtask.js" defer></script>
+
+    <!-- HEADER: sezione utente + citazione giornaliera + parole chiave -->
     <header>
         <div id="intro">
             <div id="intro-info">
+                <!-- Avatar utente -->
                 <img id="intro-info-img" src="./resorces/img/io.png" alt="MM">
                 <div id="intro-info-saluto">                    
                     <p id="greeting">Ciao</p>
                     <h2 id="user-name">Michele</h2>
                 </div>
             </div>
+
+            <!-- Frase motivazionale caricata dinamicamente -->
             <div id="intro-cit">
                 <p id="user-quote">Caricamento..</p>
             </div>  
         </div>
 
+        <!-- Parole chiave giornaliere (keywords) -->
         <div id="intro-keyword"> 
             <div id="keywoeds">
-                <div class="keyword shadow-4" id="keyword-01">
-                    <p>Felicità</p>
-                </div>
-                <div class="keyword shadow-4" id="keyword-02">
-                    <p>Viaggio</p>
-                </div>
-                <div class="keyword shadow-4" id="keyword-03">
-                    <p>Libro</p>
-                </div>
+                <div class="keyword shadow-4" id="keyword-01"><p>Felicità</p></div>
+                <div class="keyword shadow-4" id="keyword-02"><p>Viaggio</p></div>
+                <div class="keyword shadow-4" id="keyword-03"><p>Libro</p></div>
             </div>
+
+            <!-- Finestre info keyword -->
             <div class="keywords-more ">
-                <div id="info-keyword-01" class="info-keyword hide ">
+                <div id="info-keyword-01" class="info-keyword hide">
                     <div class="windows-keyword shadow-2">
                         <h3 class="keyword-title">Felicità / word</h3>
                         <h5 class="keyword-title">Felicità / word</h5>
                         <p class="keyword-info">
-                            Lorem, ipsum dolor sit amet consectetur adipisicing elit. 
-                            Explicabo, qui enim! Dolorum delectus esse dolor tempora tempore! 
-                            Aliquid adipisci, minus fugit quidem quasi impedit labore eos facilis 
-                            cum totam. Libero.
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit...
                         </p>
                     </div>
                 </div>
@@ -60,10 +65,7 @@
                         <h3 class="keyword-title">Viaggio / word</h3>
                         <h5 class="keyword-title">Felicità / word</h5>
                         <p class="keyword-info">
-                            Lorem, ipsum dolor sit amet consectetur adipisicing elit. 
-                            Explicabo, qui enim! Dolorum delectus esse dolor tempora tempore! 
-                            Aliquid adipisci, minus fugit quidem quasi impedit labore eos facilis 
-                            cum totam. Libero.
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit...
                         </p>
                     </div>
                 </div>
@@ -72,16 +74,15 @@
                         <h3 class="keyword-title">Libro / word</h3>
                         <h5 class="keyword-title">Felicità / word</h5>
                         <p class="keyword-info">
-                            Lorem, ipsum dolor sit amet consectetur adipisicing elit. 
-                            Explicabo, qui enim! Dolorum delectus esse dolor tempora tempore! 
-                            Aliquid adipisci, minus fugit quidem quasi impedit labore eos facilis 
-                            cum totam. Libero.
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit...
                         </p>
                     </div>
                 </div>
             </div>
         </div>
     </header>
+
+    <!-- NAVBAR principale -->
     <div id="navbar" class="shadow-6">
         <div id="today" class="navbar-icon navbar-icon-main-page">
             <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
@@ -110,6 +111,8 @@
             </svg>
         </div>
     </div>
+
+    <!-- FORM per aggiungere nuova task -->
     <div id="task-form-container" class="hide">
         <form id="taskForm" class="form-container">
             <h1>Add My Task</h1>
@@ -120,10 +123,11 @@
                 <label for="titolo">Inserisci titolo*</label>
             </div>
 
-            <!-- Genere, Tag e categoria -->
+            <!-- Genere + Tag + Categoria -->
             <div class="select-group">
+                <!-- Tipo di elemento -->
                 <div class="input-group">
-                    <select id="genere" class="select-field" value="" required>
+                    <select id="genere" class="select-field" required>
                         <option value="" disabled selected></option>
                         <option value="task">Task</option>
                         <option value="event">Eventi</option>
@@ -131,8 +135,10 @@
                     </select>
                     <label for="genere">Genere</label>
                 </div>
+
+                <!-- Tag per le task -->
                 <div class="input-group task">
-                    <select id="tag" class="select-field" value="" required>
+                    <select id="tag" class="select-field" required>
                         <option value="" disabled selected></option>
                         <option value="lavoro">Lavoro</option>
                         <option value="personale">Personale</option>
@@ -140,8 +146,10 @@
                     </select>
                     <label for="tag">Tag</label>
                 </div>
+
+                <!-- Categoria per le note -->
                 <div class="input-group input-group-note hide">
-                    <select id="categoria" class="select-field" value="" required>
+                    <select id="categoria" class="select-field" required>
                         <option value="" disabled selected></option>
                         <option value="progetti">Progetti</option>
                         <option value="idee">Idee</option>
@@ -152,16 +160,16 @@
                 </div>
             </div>
 
-            <!-- Task giornaliera -->
+            <!-- Checkbox Task giornaliera -->
             <div class="checkbox-group task">
                 <input type="checkbox" id="taskGiornaliera">
                 <label for="taskGiornaliera">Task giornaliera</label>
             </div>
 
             <!-- Urgenza e Priorità -->
-            <div class="select-group task">
+            <div id="input-priority" class="select-group task">
                 <div class="input-group">
-                    <select id="urgenza" class="select-field" value="" required>
+                    <select id="urgenza" class="select-field" required>
                         <option value="" disabled selected></option>
                         <option value="alta">Alta</option>
                         <option value="media">Media</option>
@@ -170,62 +178,59 @@
                     <label for="urgenza">Urgenza</label>
                 </div>
                 <div class="input-group">
-                    <select id="priorita" class="select-field" value="" required>
+                    <select id="priorita" class="select-field" required>
                         <option value="" disabled selected></option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
+                        <option value="alta">Alta</option>
+                        <option value="media">Media</option>
+                        <option value="bassa">Bassa</option>
                     </select>
                     <label for="priorita">Priorità</label>
                 </div>
             </div>
 
-            <!-- Inizio -->
-            <p class="task" style="margin-bottom: 10px; color: var(--text-dark); font-weight: 600;">Inizio:</p>
-            <div class="time-date-group time-date-group-task task">
-                <div class="input-group input-group-task">
-                    <input type="time" id="inizioOra" class="input-field" placeholder="&nbsp;" value="00:00">
+            <!-- Sezione Inizio task -->
+            <p class="task task-today" style="margin-bottom: 10px;">Inizio:</p>
+            <div class="time-date-group task task-today">
+                <div class="input-group">
+                    <input type="time" id="inizioOra" class="input-field" value="00:00">
                     <label for="inizioOra">Ora</label>
                 </div>
-                <div class="input-group input-group-task">
-                    <input type="date" id="inizioData" class="input-field" placeholder="&nbsp;">
+                <div class="input-group">
+                    <input type="date" id="inizioData" class="input-field">
                     <label for="inizioData">Data</label>
                 </div>
             </div>
 
-            <!-- In giornata -->
-            <div class="checkbox-group task">
+            <!-- Checkbox "In giornata" -->
+            <div class="checkbox-group task task-today">
                 <input type="checkbox" id="inGiornata">
                 <label for="inGiornata">In giornata</label>
             </div>
 
-            <!-- Fine -->
-            <p class="group-task" style="margin-bottom: 10px; color: var(--text-dark); font-weight: 600;">Fine</p>
-            <div class="time-date-group task">
+            <!-- Sezione Fine task -->
+            <p class="group-task task-today end-task" style="margin-bottom: 10px;">Fine</p>
+            <div class="time-date-group task task-today end-task">
                 <div class="input-group">
-                    <input type="time" id="fineOra" class="input-field" placeholder="&nbsp;" value="00:00">
+                    <input type="time" id="fineOra" class="input-field" value="00:00">
                     <label for="fineOra">Ora</label>
                 </div>
                 <div class="input-group">
-                    <input type="date" id="fineData" class="input-field" placeholder="&nbsp;">
+                    <input type="date" id="fineData" class="input-field">
                     <label for="fineData">Data</label>
                 </div>
             </div>
 
-            <!-- Dettagli -->
+            <!-- Dettagli task -->
             <div class="input-group">
                 <textarea id="dettagli" placeholder="Inserisci dettagli..."></textarea>
             </div>
 
-            <!-- Bottone Salva -->
-            <button type="submit" class="save-button">
-                Salva
-            </button>
+            <!-- Bottone di salvataggio -->
+            <button type="submit" class="save-button">Salva</button>
         </form>
     </div>
 
-    <main>
-
-    </main>
+    <!-- Contenuto principale caricato dinamicamente -->
+    <main></main>
 </body>
 </html>

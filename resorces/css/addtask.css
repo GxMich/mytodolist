@@ -1,6 +1,6 @@
 #task-form-container {
     position: fixed;
-    top: 45%;
+    top: 40%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 200;
@@ -10,7 +10,6 @@
     width: calc(100% - 60px);
     padding: 30px 30px;
     min-height: 300px; 
-    max-height: 75vh; 
     overflow-y: auto; 
     border-radius: 16px;
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); 

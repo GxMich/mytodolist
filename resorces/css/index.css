@@ -8,8 +8,8 @@
   padding: 20px;
   position: fixed;
   bottom: 30px;
-  left: 30px;
-  right: 30px;
+  left: 10px;
+  right: 10px;
   z-index: 200;
 }
 .navbar-icon{
@@ -20,6 +20,7 @@
   justify-content: center;
   align-items: center;
   transition: all 0.3s ease-in-out; 
+  margin: 5px;
 }
 
 .icon{
@@ -32,7 +33,4 @@
   background-color: #f7a233;
   border: 1px solid rgba(0, 0, 0, 0.062);
   scale: 1.2;
-}
-#test{
-  border: 1px solid black;
 }
