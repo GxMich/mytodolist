@@ -1,236 +1,253 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Meta base -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <!-- CSS principali -->
     <link rel="stylesheet" href="./resorces/css/header.css">
     <link rel="stylesheet" href="./resorces/css/index.css">
     <link rel="stylesheet" href="./resorces/css/generic.css">
     <link rel="stylesheet" href="./resorces/css/today.css">
     <link rel="stylesheet" href="./resorces/css/addtask.css">
+    <link rel="stylesheet" href="./resorces/css/login.css">
 
     <title>My to do list</title>
 </head>
 <body>
 
-    <!-- Script JS principali -->
-    <script src="./resorces/js/header.js" defer></script>
+    <script src="./resorces/js/auth-check.js" defer></script> 
     <script src="./resorces/js/main.js" defer></script>
+    <script src="./resorces/js/auth.js" defer></script>
+    <script src="./resorces/js/header.js" defer></script>
     <script src="./resorces/js/index.js" defer></script>
     <script src="./resorces/js/today.js" defer></script>
     <script src="./resorces/js/addtask.js" defer></script>
 
-    <!-- HEADER: sezione utente + citazione giornaliera + parole chiave -->
-    <header>
-        <div id="intro">
-            <div id="intro-info">
-                <!-- Avatar utente -->
-                <img id="intro-info-img" src="./resorces/img/io.png" alt="MM">
-                <div id="intro-info-saluto">                    
-                    <p id="greeting">Ciao</p>
-                    <h2 id="user-name">Michele</h2>
+    <div id="auth-container">
+        <div class="auth-box">
+            <h1 id="auth-title">Accedi</h1>
+            <form id="loginForm" class="auth-form">
+                <div class="input-group">
+                    <input type="text" id="loginCredenziale" class="input-field" required>
+                    <label for="loginCredenziale">Username o Email</label>
                 </div>
+                <div class="input-group">
+                    <input type="password" id="loginPassword" class="input-field" required>
+                    <label for="loginPassword">Password</label>
+                </div>
+                <button type="submit" class="auth-button save-button">Accedi</button>
+                <p id="loginMessage" class="error-message"></p>
+                <p class="auth-switch">Non hai un account? <span id="switchToRegister" class="link-text">Registrati qui</span></p>
+            </form>
+
+            <form id="registerForm" class="auth-form" style="display:none;">
+                <div class="input-group">
+                    <input type="text" id="registerUsername" class="input-field" required>
+                    <label for="registerUsername">Username</label>
+                </div>
+                <div class="input-group">
+                    <input type="email" id="registerEmail" class="input-field" required>
+                    <label for="registerEmail">Email</label>
+                </div>
+                <div class="input-group">
+                    <input type="password" id="registerPassword" class="input-field" required>
+                    <label for="registerPassword">Password</label>
+                </div>
+                <button type="submit" class="auth-button save-button">Registrati</button>
+                <p id="registerMessage" class="error-message"></p>
+                <p class="auth-switch">Hai già un account? <span id="switchToLogin" class="link-text" style="display:none;">Accedi qui</span></p>
+            </form>
+        </div>
+    </div> 
+    <div id="app-container" class="hide">
+        
+        <header>
+            <div id="intro">
+                <div id="intro-info">
+                    <img id="intro-info-img" src="./resorces/img/io.png" alt="MM">
+                    <div id="intro-info-saluto">                    
+                        <p id="greeting">Ciao</p>
+                        <h2 id="user-name">Michele</h2>
+                    </div>
+                    <button id="logoutButton" class="auth-button save-button">Logout</button>
+                </div>
+
+                <div id="intro-cit">
+                    <p id="user-quote">Caricamento..</p>
+                </div>  
             </div>
 
-            <!-- Frase motivazionale caricata dinamicamente -->
-            <div id="intro-cit">
-                <p id="user-quote">Caricamento..</p>
-            </div>  
-        </div>
-
-        <!-- Parole chiave giornaliere (keywords) -->
-        <div id="intro-keyword"> 
-            <div id="keywoeds">
-                <div class="keyword shadow-4" id="keyword-01"><p>Felicità</p></div>
-                <div class="keyword shadow-4" id="keyword-02"><p>Viaggio</p></div>
-                <div class="keyword shadow-4" id="keyword-03"><p>Libro</p></div>
-            </div>
-
-            <!-- Finestre info keyword -->
-            <div class="keywords-more ">
-                <div id="info-keyword-01" class="info-keyword hide">
-                    <div class="windows-keyword shadow-2">
-                        <h3 class="keyword-title">Felicità / word</h3>
-                        <h5 class="keyword-title">Felicità / word</h5>
-                        <p class="keyword-info">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit...
-                        </p>
-                    </div>
+            <div id="intro-keyword"> 
+                <div id="keywoeds">
+                    <div class="keyword shadow-4" id="keyword-01"><p>Felicità</p></div>
+                    <div class="keyword shadow-4" id="keyword-02"><p>Viaggio</p></div>
+                    <div class="keyword shadow-4" id="keyword-03"><p>Libro</p></div>
                 </div>
-                <div id="info-keyword-02" class="info-keyword hide">
-                    <div class="windows-keyword shadow-4">
-                        <h3 class="keyword-title">Viaggio / word</h3>
-                        <h5 class="keyword-title">Felicità / word</h5>
-                        <p class="keyword-info">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit...
-                        </p>
+
+                <div class="keywords-more ">
+                    <div id="info-keyword-01" class="info-keyword hide">
+                        <div class="windows-keyword shadow-2">
+                            <h3 class="keyword-title">Felicità / word</h3>
+                            <h5 class="keyword-title">Felicità / word</h5>
+                            <p class="keyword-info">
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit...
+                            </p>
+                        </div>
                     </div>
-                </div>
-                <div id="info-keyword-03" class="info-keyword hide">
-                    <div class="windows-keyword shadow-4">
-                        <h3 class="keyword-title">Libro / word</h3>
-                        <h5 class="keyword-title">Felicità / word</h5>
-                        <p class="keyword-info">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit...
-                        </p>
+                    <div id="info-keyword-02" class="info-keyword hide">
+                        <div class="windows-keyword shadow-4">
+                            <h3 class="keyword-title">Viaggio / word</h3>
+                            <h5 class="keyword-title">Felicità / word</h5>
+                            <p class="keyword-info">
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit...
+                            </p>
+                        </div>
+                    </div>
+                    <div id="info-keyword-03" class="info-keyword hide">
+                        <div class="windows-keyword shadow-4">
+                            <h3 class="keyword-title">Libro / word</h3>
+                            <h5 class="keyword-title">Felicità / word</h5>
+                            <p class="keyword-info">
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit...
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </header>
+        </header>
 
-    <!-- NAVBAR principale -->
-    <div id="navbar" class="shadow-6">
-        <div id="today" class="navbar-icon navbar-icon-main-page">
-            <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
-                <path strokeLinecap="round" strokeLinejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
-            </svg>
+        <div id="navbar" class="shadow-6">
+            <div id="today" class="navbar-icon navbar-icon-main-page">
+                <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+                </svg>
+            </div>
+            <div id="calendar" class="navbar-icon navbar-icon-main-page">
+                <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5" />
+                </svg>
+            </div>
+        <div id="addTask" class="navbar-icon shadow-4">
+                <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" className="size-6">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                </svg>
+            </div>
+            <div id="note" class="navbar-icon navbar-icon-main-page">
+                <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-Width={1.5} stroke="currentColor" className="size-6">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
+                </svg>
+            </div>
+            <div id="document" class="navbar-icon navbar-icon-main-page">
+                <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
+                </svg>
+            </div>
         </div>
-        <div id="calendar" class="navbar-icon navbar-icon-main-page">
-            <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5" />
-            </svg>
+
+        <div id="task-form-container" class="hide">
+            <form id="taskForm" class="form-container">
+                <h1>Add My Task</h1>
+
+                <div class="input-group">
+                    <input type="text" id="titolo" class="input-field" placeholder="&nbsp;" required>
+                    <label for="titolo">Inserisci titolo*</label>
+                </div>
+                <div class="select-group">
+                    <div class="input-group">
+                        <select id="genere" class="select-field" required>
+                            <option value="" disabled selected></option>
+                            <option value="task">Task</option>
+                            <option value="event">Eventi</option>
+                            <option value="note">Note</option>
+                        </select>
+                        <label for="genere">Genere</label>
+                    </div>
+
+                    <div class="input-group task">
+                        <select id="tag" class="select-field" required>
+                            <option value="" disabled selected></option>
+                            <option value="lavoro">Lavoro</option>
+                            <option value="personale">Personale</option>
+                            <option value="studio">Studio</option>
+                        </select>
+                        <label for="tag">Tag</label>
+                    </div>
+
+                    <div class="input-group input-group-note hide">
+                        <select id="categoria" class="select-field" required>
+                            <option value="" disabled selected></option>
+                            <option value="progetti">Progetti</option>
+                            <option value="idee">Idee</option>
+                            <option value="bussines">Bussines</option>
+                            <option value="obbietivi">Obbietivi</option>
+                        </select>
+                        <label for="categoria">Categoria</label>
+                    </div>
+                </div>
+
+                <div class="checkbox-group task">
+                    <input type="checkbox" id="taskGiornaliera">
+                    <label for="taskGiornaliera">Task giornaliera</label>
+                </div>
+
+                <div id="input-priority" class="select-group task">
+                    <div class="input-group">
+                        <select id="urgenza" class="select-field" required>
+                            <option value="" disabled selected></option>
+                            <option value="alta">Alta</option>
+                            <option value="media">Media</option>
+                            <option value="bassa">Bassa</option>
+                        </select>
+                        <label for="urgenza">Urgenza</label>
+                    </div>
+                    <div class="input-group">
+                        <select id="priorita" class="select-field" required>
+                            <option value="" disabled selected></option>
+                            <option value="alta">Alta</option>
+                            <option value="media">Media</option>
+                            <option value="bassa">Bassa</option>
+                        </select>
+                        <label for="priorita">Priorità</label>
+                    </div>
+                </div>
+
+                <p class="task task-today" style="margin-bottom: 10px;">Inizio:</p>
+                <div class="time-date-group task task-today">
+                    <div class="input-group">
+                        <input type="time" id="inizioOra" class="input-field" value="00:00"> 
+                        <label for="inizioOra">Ora</label>
+                    </div>
+                    <div class="input-group">
+                        <input type="date" id="inizioData" class="input-field">
+                        <label for="inizioData">Data</label>
+                    </div>
+                </div>
+
+                <div class="checkbox-group task task-today">
+                    <input type="checkbox" id="inGiornata">
+                    <label for="inGiornata">In giornata</label>
+                </div>
+
+                <p class="group-task task-today end-task" style="margin-bottom: 10px;">Fine</p>
+                <div class="time-date-group task task-today end-task">
+                    <div class="input-group">
+                        <input type="time" id="fineOra" class="input-field" value="00:00">
+                        <label for="fineOra">Ora</label>
+                    </div>
+                    <div class="input-group">
+                        <input type="date" id="fineData" class="input-field">
+                        <label for="fineData">Data</label>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <textarea id="dettagli" placeholder="Inserisci dettagli..."></textarea>
+                </div>
+
+                <button type="submit" class="save-button">Salva</button>
+            </form>
         </div>
-       <div id="addTask" class="navbar-icon shadow-4">
-            <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" className="size-6">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-            </svg>
-        </div>
-        <div id="note" class="navbar-icon navbar-icon-main-page">
-            <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-Width={1.5} stroke="currentColor" className="size-6">
-                <path strokeLinecap="round" strokeLinejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
-            </svg>
-        </div>
-        <div id="setting" class="navbar-icon navbar-icon-main-page">
-            <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.325.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 0 1 1.37.49l1.296 2.247a1.125 1.125 0 0 1-.26 1.431l-1.003.827c-.293.241-.438.613-.43.992a7.723 7.723 0 0 1 0 .255c-.008.378.137.75.43.991l1.004.827c.424.35.534.955.26 1.43l-1.298 2.247a1.125 1.125 0 0 1-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.47 6.47 0 0 1-.22.128c-.331.183-.581.495-.644.869l-.213 1.281c-.09.543-.56.94-1.11.94h-2.594c-.55 0-1.019-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 0 1-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 0 1-1.369-.49l-1.297-2.247a1.125 1.125 0 0 1 .26-1.431l1.004-.827c.292-.24.437-.613.43-.991a6.932 6.932 0 0 1 0-.255c.007-.38-.138-.751-.43-.992l-1.004-.827a1.125 1.125 0 0 1-.26-1.43l1.297-2.247a1.125 1.125 0 0 1 1.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.086.22-.128.332-.183.582-.495.644-.869l.214-1.28Z" />
-                <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-            </svg>
-        </div>
+
+        <main></main>
     </div>
-
-    <!-- FORM per aggiungere nuova task -->
-    <div id="task-form-container" class="hide">
-        <form id="taskForm" class="form-container">
-            <h1>Add My Task</h1>
-
-            <!-- Titolo -->
-            <div class="input-group">
-                <input type="text" id="titolo" class="input-field" placeholder="&nbsp;" required>
-                <label for="titolo">Inserisci titolo*</label>
-            </div>
-
-            <!-- Genere + Tag + Categoria -->
-            <div class="select-group">
-                <!-- Tipo di elemento -->
-                <div class="input-group">
-                    <select id="genere" class="select-field" required>
-                        <option value="" disabled selected></option>
-                        <option value="task">Task</option>
-                        <option value="event">Eventi</option>
-                        <option value="note">Note</option>
-                    </select>
-                    <label for="genere">Genere</label>
-                </div>
-
-                <!-- Tag per le task -->
-                <div class="input-group task">
-                    <select id="tag" class="select-field" required>
-                        <option value="" disabled selected></option>
-                        <option value="lavoro">Lavoro</option>
-                        <option value="personale">Personale</option>
-                        <option value="studio">Studio</option>
-                    </select>
-                    <label for="tag">Tag</label>
-                </div>
-
-                <!-- Categoria per le note -->
-                <div class="input-group input-group-note hide">
-                    <select id="categoria" class="select-field" required>
-                        <option value="" disabled selected></option>
-                        <option value="progetti">Progetti</option>
-                        <option value="idee">Idee</option>
-                        <option value="bussines">Bussines</option>
-                        <option value="obbietivi">Obbietivi</option>
-                    </select>
-                    <label for="categoria">Categoria</label>
-                </div>
-            </div>
-
-            <!-- Checkbox Task giornaliera -->
-            <div class="checkbox-group task">
-                <input type="checkbox" id="taskGiornaliera">
-                <label for="taskGiornaliera">Task giornaliera</label>
-            </div>
-
-            <!-- Urgenza e Priorità -->
-            <div id="input-priority" class="select-group task">
-                <div class="input-group">
-                    <select id="urgenza" class="select-field" required>
-                        <option value="" disabled selected></option>
-                        <option value="alta">Alta</option>
-                        <option value="media">Media</option>
-                        <option value="bassa">Bassa</option>
-                    </select>
-                    <label for="urgenza">Urgenza</label>
-                </div>
-                <div class="input-group">
-                    <select id="priorita" class="select-field" required>
-                        <option value="" disabled selected></option>
-                        <option value="alta">Alta</option>
-                        <option value="media">Media</option>
-                        <option value="bassa">Bassa</option>
-                    </select>
-                    <label for="priorita">Priorità</label>
-                </div>
-            </div>
-
-            <!-- Sezione Inizio task -->
-            <p class="task task-today" style="margin-bottom: 10px;">Inizio:</p>
-            <div class="time-date-group task task-today">
-                <div class="input-group">
-                    <input type="time" id="inizioOra" class="input-field" value="00:00">
-                    <label for="inizioOra">Ora</label>
-                </div>
-                <div class="input-group">
-                    <input type="date" id="inizioData" class="input-field">
-                    <label for="inizioData">Data</label>
-                </div>
-            </div>
-
-            <!-- Checkbox "In giornata" -->
-            <div class="checkbox-group task task-today">
-                <input type="checkbox" id="inGiornata">
-                <label for="inGiornata">In giornata</label>
-            </div>
-
-            <!-- Sezione Fine task -->
-            <p class="group-task task-today end-task" style="margin-bottom: 10px;">Fine</p>
-            <div class="time-date-group task task-today end-task">
-                <div class="input-group">
-                    <input type="time" id="fineOra" class="input-field" value="00:00">
-                    <label for="fineOra">Ora</label>
-                </div>
-                <div class="input-group">
-                    <input type="date" id="fineData" class="input-field">
-                    <label for="fineData">Data</label>
-                </div>
-            </div>
-
-            <!-- Dettagli task -->
-            <div class="input-group">
-                <textarea id="dettagli" placeholder="Inserisci dettagli..."></textarea>
-            </div>
-
-            <!-- Bottone di salvataggio -->
-            <button type="submit" class="save-button">Salva</button>
-        </form>
-    </div>
-
-    <!-- Contenuto principale caricato dinamicamente -->
-    <main></main>
-</body>
+    </body>
 </html>

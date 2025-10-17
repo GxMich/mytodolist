@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./resorces/css/header.css">
+    <link rel="stylesheet" href="./resorces/css/index.css">
+    <link rel="stylesheet" href="./resorces/css/generic.css">
+    <link rel="stylesheet" href="./resorces/css/today.css">
+    <link rel="stylesheet" href="./resorces/css/addtask.css">
+    <title>Document</title>
+    <style>
+.task-card {
+  background: #ffffff;
+  color: #000000;
+  padding: 1rem;
+  border-radius: 1rem;
+  margin: 0.75rem 0;
+  box-shadow: 0 4px 10px rgb(255, 1, 1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  position: relative;
+}
+
+.task-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+}
+
+/* HEADER */
+.task-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.task-deadline {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #9b5d00;
+}
+
+/* MENU */
+.task-menu {
+  position: relative;
+}
+
+.menu-btn {
+  background: transparent;
+  border: none;
+  color: #000000;
+  font-size: 1.3rem;
+  cursor: pointer;
+}
+
+.menu-options {
+  display: none;
+  position: absolute;
+  top: 1.5rem;
+  right: 0;
+  background: #2a2a2a;
+  border-radius: 0.5rem;
+  list-style: none;
+  padding: 0.5rem 0;
+  margin: 0;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+  z-index: 10;
+}
+
+.menu-options li {
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background 0.2s;
+}
+
+.menu-options li:hover {
+  background: #333;
+}
+
+/* TESTO E META */
+.task-title {
+  margin: 0.75rem 0 0.25rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.task-desc {
+  color: #383838;
+  font-size: 0.9rem;
+  margin-bottom: 0.75rem;
+}
+
+.task-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  color: #000000;
+}
+
+/* PRIORITÀ VISIVA */
+.high-priority {
+  border-left: 5px solid #ff4444;
+}
+.medium-priority {
+  border-left: 5px solid #ffaa00;
+}
+.low-priority {
+  border-left: 5px solid #44ff44;
+}
+
+/* RESPONSIVE */
+@media (max-width: 600px) {
+  .task-meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.3rem;
+  }
+}
+
+    </style>
+</head>
+<body>
+  <div class="task-card high-priority">
+    <div class="task-header">
+      <span class="task-deadline">📅 15 Ott 2025</span>
+      <div class="task-menu">
+        <button class="menu-btn">⋮</button>
+        <ul class="menu-options">
+          <li>Modifica</li>
+          <li>Cambia stato</li>
+          <li>Elimina</li>
+        </ul>
+      </div>
+    </div>
+    <h3 class="task-title">Aggiornare il portfolio web</h3>
+    <p class="task-desc">Aggiungere sezione "About" e ottimizzare le skill.</p>
+  </div>
+
+  <script>
+    document.querySelectorAll('.task-done').forEach(checkbox => {
+      
+      checkbox.addEventListener('change', e => {
+        const card = e.target.closest('.task-card');
+        card.classList.toggle('completed', e.target.checked);
+      });
+    });
+    const btnMenu = document.querySelectorAll('.menu-btn');
+      btnMenu.forEach(el => {
+        el.addEventListener('click',{
+          
+        });
+      });
+  </script>
+</body>
+</html>

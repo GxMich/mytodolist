@@ -7,6 +7,8 @@
 }
 body{
   margin: 30px 30px 0 30px;
+  padding-bottom: 120px;
+    background-color: whitesmoke;
 }
 
 .hide{
@@ -38,6 +40,61 @@ body{
     pointer-events: none; /* Impedisce l'interazione con gli elementi sfocati */
     transition: filter 0.3s ease; /* Transizione fluida per l'effetto blur */
 }
+
+/* CSS per l'overlay (Sfondo che blocca la pagina) */
+#custom-alert-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4); /* Sfondo semi-trasparente */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999; /* Alto z-index per stare sopra tutto */
+}
+
+/* CSS per la card Glassmorphism */
+#custom-alert-card {
+    background: rgba(255, 255, 255, 0.25); /* Sfondo molto chiaro e trasparente */
+    backdrop-filter: blur(8px); /* L'effetto vetro opaco */
+    -webkit-backdrop-filter: blur(8px); /* Supporto per Safari */
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    padding: 30px;
+    max-width: 400px;
+    width: 90%;
+    text-align: center;
+    color: #1A1A1A;
+}
+
+#custom-alert-card h3 {
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+    color: #4CAF50; /* Verde per successo */
+}
+
+#custom-alert-card p {
+    margin-bottom: 25px;
+}
+
+#alert-close-button {
+    background-color: #f7a233;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+}
+
+#alert-close-button:hover {
+    background-color: #DDA03D;
+}
+
 
 /* Ombra morbida stile iOS */
 .shadow-1 {

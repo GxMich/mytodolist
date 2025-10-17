@@ -1,12 +1,12 @@
 #task-form-container {
     position: fixed;
-    top: 40%;
+    top: 44%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 200;
     color: #1A1A1A;
     background-color: #f6f5fa;
-    max-width: 460px;
+    max-width: 500px;
     width: calc(100% - 60px);
     padding: 30px 30px;
     min-height: 300px; 
