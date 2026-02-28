@@ -1,0 +1,251 @@
+/* ====== LANDING PAGE — Premium Presentation ====== */
+#landing-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: var(--bg-color);
+    padding: 40px 20px;
+    text-align: center;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Ambient Glow Background */
+#landing-container::before {
+    content: '';
+    position: absolute;
+    top: -30%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(232, 168, 73, 0.12) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+    animation: glowPulse 4s ease-in-out infinite alternate;
+}
+
+@keyframes glowPulse {
+    from {
+        opacity: 0.5;
+        transform: translateX(-50%) scale(0.9);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(-50%) scale(1.1);
+    }
+}
+
+/* Logo */
+.landing-logo {
+    width: 120px;
+    height: 120px;
+    border-radius: 28px;
+    object-fit: cover;
+    margin-bottom: 24px;
+    animation: logoIn 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+    box-shadow: 0 8px 32px rgba(232, 168, 73, 0.2);
+}
+
+@keyframes logoIn {
+    from {
+        opacity: 0;
+        transform: scale(0.7) translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+/* App Name */
+.landing-title {
+    font-size: 2.8rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    letter-spacing: -1px;
+    margin-bottom: 8px;
+    animation: textFadeUp 0.8s 0.15s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.landing-title .accent {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Tagline */
+.landing-tagline {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    max-width: 380px;
+    line-height: 1.6;
+    margin-bottom: 48px;
+    animation: textFadeUp 0.8s 0.3s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes textFadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(16px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Features Grid */
+.landing-features {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    max-width: 500px;
+    width: 100%;
+    margin-bottom: 48px;
+    animation: textFadeUp 0.8s 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.feature-card {
+    background: var(--surface-solid);
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    padding: 20px 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+}
+
+.feature-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.feature-icon svg {
+    width: 22px;
+    height: 22px;
+    stroke-width: 2;
+}
+
+.feature-icon.icon-tasks {
+    background: rgba(232, 168, 73, 0.12);
+    color: var(--primary);
+}
+
+.feature-icon.icon-notes {
+    background: rgba(91, 141, 239, 0.12);
+    color: var(--tag-lavoro);
+}
+
+.feature-icon.icon-calendar {
+    background: rgba(175, 82, 222, 0.12);
+    color: var(--tag-studio);
+}
+
+.feature-label {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+/* CTA Button */
+.landing-cta {
+    padding: 16px 48px;
+    border: none;
+    border-radius: 16px;
+    font-size: 1.05rem;
+    font-weight: 700;
+    font-family: inherit;
+    cursor: pointer;
+    background: linear-gradient(135deg, var(--primary), var(--primary-hover));
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+    animation: textFadeUp 0.8s 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+    box-shadow: 0 4px 20px rgba(232, 168, 73, 0.25);
+    letter-spacing: 0.3px;
+}
+
+.landing-cta:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 32px rgba(232, 168, 73, 0.4);
+}
+
+.landing-cta:active {
+    transform: translateY(0);
+}
+
+.landing-cta svg {
+    transition: transform 0.3s ease;
+}
+
+.landing-cta:hover svg {
+    transform: translateX(4px);
+}
+
+/* Footer text */
+.landing-footer {
+    margin-top: 32px;
+    font-size: 0.78rem;
+    color: var(--text-tertiary);
+    animation: textFadeUp 0.8s 0.75s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Responsive */
+@media (max-width: 500px) {
+    .landing-logo {
+        width: 96px;
+        height: 96px;
+        border-radius: 24px;
+    }
+
+    .landing-title {
+        font-size: 2.2rem;
+    }
+
+    .landing-tagline {
+        font-size: 1rem;
+        margin-bottom: 36px;
+    }
+
+    .landing-features {
+        gap: 10px;
+        margin-bottom: 36px;
+    }
+
+    .feature-card {
+        padding: 16px 8px;
+        border-radius: 16px;
+    }
+
+    .landing-cta {
+        padding: 14px 40px;
+        font-size: 1rem;
+    }
+}
+
+@keyframes landingOut {
+    to {
+        opacity: 0;
+        transform: translateY(-20px) scale(0.97);
+    }
+}

@@ -1,7 +1,116 @@
-<div>
-    <h2>Setting</h2>
-    <div>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium, deserunt! Cupiditate quasi, ratione similique, saepe assumenda iure at accusantium velit deleniti aperiam ad doloremque est voluptates, praesentium omnis blanditiis pariatur.</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde asperiores enim magni eos aspernatur tempora animi consectetur corrupti a similique? Molestias explicabo iure iusto quia illo labore odio, ea neque?</p>
+<div class="settings-container">
+    <h2 class="page-title">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
+            stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            style="vertical-align: text-bottom; margin-right: 4px;">
+            <circle cx="12" cy="12" r="3" />
+            <path
+                d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" />
+        </svg>
+        Impostazioni
+    </h2>
+
+    <!-- Profile Card -->
+    <div class="settings-section shadow-4" style="text-align:center;">
+        <div style="margin-bottom: 12px;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 24 24" fill="none"
+                stroke="var(--primary)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                <circle cx="12" cy="7" r="4" />
+            </svg>
+        </div>
+        <h3 id="profile-username" style="font-size: 1.3rem; color: var(--text-primary);">...</h3>
+        <p id="profile-id" style="font-size: 0.8rem; color: var(--text-tertiary); margin-top: 2px;">ID: ...</p>
+    </div>
+
+    <!-- Weekly Stats -->
+    <div class="settings-section shadow-4">
+        <h3>
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                style="vertical-align: text-bottom; margin-right: 4px;">
+                <line x1="18" y1="20" x2="18" y2="10" />
+                <line x1="12" y1="20" x2="12" y2="4" />
+                <line x1="6" y1="20" x2="6" y2="14" />
+            </svg>
+            Statistiche settimanali
+        </h3>
+        <div id="weekly-stats" class="stats-chart"></div>
+        <div style="display: flex; gap: 16px; margin-top: 12px; flex-wrap: wrap;">
+            <div id="stat-total" style="font-size: 0.85rem; color: var(--text-secondary);">
+                <strong style="color: var(--text-primary); font-size: 1.2rem;">0</strong> totali
+            </div>
+            <div id="stat-completed" style="font-size: 0.85rem; color: var(--text-secondary);">
+                <strong style="color: var(--success); font-size: 1.2rem;">0</strong> completate
+            </div>
+            <div id="stat-pending" style="font-size: 0.85rem; color: var(--text-secondary);">
+                <strong style="color: var(--primary); font-size: 1.2rem;">0</strong> in corso
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Profile -->
+    <div class="settings-section shadow-4">
+        <h3>
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                style="vertical-align: text-bottom; margin-right: 4px;">
+                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
+            </svg>
+            Modifica Profilo
+        </h3>
+        <form id="settingsForm">
+            <div class="input-group">
+                <input type="text" id="settingsUsername" class="input-field" placeholder="&nbsp;">
+                <label for="settingsUsername">Nuovo Username</label>
+            </div>
+            <div class="input-group">
+                <input type="email" id="settingsEmail" class="input-field" placeholder="&nbsp;">
+                <label for="settingsEmail">Nuova Email</label>
+            </div>
+            <div class="input-group">
+                <input type="password" id="settingsPassword" class="input-field" placeholder="&nbsp;">
+                <label for="settingsPassword">Nuova Password</label>
+            </div>
+            <button type="submit" class="save-button">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+                    style="vertical-align: text-bottom; margin-right: 4px;">
+                    <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z" />
+                    <polyline points="17 21 17 13 7 13 7 21" />
+                    <polyline points="7 3 7 8 15 8" />
+                </svg>
+                Salva Modifiche
+            </button>
+            <p id="settingsMessage" class="settings-message"></p>
+        </form>
+    </div>
+
+    <!-- Export -->
+    <div class="settings-section shadow-4">
+        <h3>
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                style="vertical-align: text-bottom; margin-right: 4px;">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                <polyline points="7 10 12 15 17 10" />
+                <line x1="12" y1="15" x2="12" y2="3" />
+            </svg>
+            Esporta Dati
+        </h3>
+        <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 12px;">Scarica tutte le tue task e
+            note in formato JSON.</p>
+        <button id="exportBtn" class="save-button" type="button"
+            style="background: var(--surface-hover); color: var(--text-primary);">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+                style="vertical-align: text-bottom; margin-right: 4px;">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                <polyline points="7 10 12 15 17 10" />
+                <line x1="12" y1="15" x2="12" y2="3" />
+            </svg>
+            Scarica JSON
+        </button>
     </div>
 </div>

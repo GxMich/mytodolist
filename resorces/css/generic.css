@@ -1,136 +1,248 @@
-/* Reset semplice */
+/* ====== iOS LIQUID GLASS DESIGN SYSTEM ====== */
+
+/* --- Light Mode (Default) --- */
+:root {
+  --bg-color: #F2F2F7;
+  --surface-color: rgba(255, 255, 255, 0.72);
+  --surface-solid: #FFFFFF;
+  --surface-hover: rgba(255, 255, 255, 0.85);
+  --glass-blur: blur(40px);
+  --glass-border: 1px solid rgba(255, 255, 255, 0.5);
+
+  --primary: #E8A849;
+  --primary-hover: #D4922E;
+  --primary-alpha: rgba(232, 168, 73, 0.15);
+  --secondary: #EF8A6A;
+  --success: #34C759;
+  --danger: #FF3B30;
+  --warning: #FF9500;
+
+  --text-primary: #1C1C1E;
+  --text-secondary: #8E8E93;
+  --text-tertiary: #AEAEB2;
+  --border-color: rgba(60, 60, 67, 0.08);
+
+  --tag-lavoro: #5B8DEF;
+  --tag-personale: #34C759;
+  --tag-studio: #AF52DE;
+
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.1);
+  --radius-sm: 12px;
+  --radius-md: 20px;
+  --radius-lg: 32px;
+}
+
+/* --- Dark Mode --- */
+[data-theme="dark"] {
+  --bg-color: #000000;
+  --surface-color: rgba(44, 44, 46, 0.55);
+  --surface-solid: #1C1C1E;
+  --surface-hover: rgba(58, 58, 60, 0.7);
+  --glass-border: 1px solid rgba(255, 255, 255, 0.08);
+
+  --primary: #E8A849;
+  --primary-hover: #F0B860;
+  --primary-alpha: rgba(232, 168, 73, 0.2);
+
+  --text-primary: #F5F5F7;
+  --text-secondary: #98989D;
+  --text-tertiary: #636366;
+  --border-color: rgba(255, 255, 255, 0.06);
+
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.5);
+}
+
+/* ====== RESET & BASE ====== */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: system-ui, sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
 }
-body{
-  margin: 30px 30px 0 30px;
+
+html {
+  color-scheme: light;
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+}
+
+body {
+  margin: 20px 20px 0 20px;
   padding-bottom: 120px;
-    background-color: whitesmoke;
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.4s ease, color 0.4s ease;
 }
 
-.hide{
-    display: none !important;
+/* ====== UTILITIES ====== */
+.hide {
+  display: none !important;
 }
 
-.selected{
-  background-color: black !important;
-  color: white !important;
-  transform: scale(1.05);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+.selected {
+  background-color: var(--text-primary) !important;
+  color: var(--bg-color) !important;
+  transform: scale(1.03);
+  box-shadow: var(--shadow-md);
 }
 
-.active{
-  background-color: #f7a233 !important;
-  border: 1px solid rgba(0, 0, 0, 0.062) !important;
-  font-weight: bolder;
+.active {
+  background-color: var(--primary) !important;
+  color: #fff !important;
+  border-color: transparent !important;
+  font-weight: 600;
 }
 
-.not-select{
-  user-select: none;/* Per alcuni browser meno recenti, potrebbero essere necessari i prefissi */
-  -webkit-user-select: none; /* Chrome, Safari */
-  -moz-user-select: none;    /* Firefox */
-  -ms-user-select: none;   /* Edge, Internet Explorer */
+.not-select {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
 }
 
 .blur-background {
-    filter: blur(10px); /* Applica un blur di 5px */
-    pointer-events: none; /* Impedisce l'interazione con gli elementi sfocati */
-    transition: filter 0.3s ease; /* Transizione fluida per l'effetto blur */
+  filter: blur(10px);
+  pointer-events: none;
+  transition: filter 0.3s ease;
 }
 
-/* CSS per l'overlay (Sfondo che blocca la pagina) */
+/* ====== LIQUID GLASS MIXIN ====== */
+.glass-surface {
+  background-color: var(--surface-color);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: var(--glass-border);
+  transition: background-color 0.4s ease, border-color 0.4s ease;
+}
+
+/* ====== ALERTS ====== */
 #custom-alert-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.4); /* Sfondo semi-trasparente */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999; /* Alto z-index per stare sopra tutto */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
 }
 
-/* CSS per la card Glassmorphism */
 #custom-alert-card {
-    background: rgba(255, 255, 255, 0.25); /* Sfondo molto chiaro e trasparente */
-    backdrop-filter: blur(8px); /* L'effetto vetro opaco */
-    -webkit-backdrop-filter: blur(8px); /* Supporto per Safari */
-    border-radius: 16px;
-    border: 1px solid rgba(255, 255, 255, 0.18);
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-    padding: 30px;
-    max-width: 400px;
-    width: 90%;
-    text-align: center;
-    color: #1A1A1A;
+  background: var(--surface-color);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border-radius: 20px;
+  border: var(--glass-border);
+  box-shadow: var(--shadow-lg);
+  padding: 30px;
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+  color: var(--text-primary);
+  animation: slideUp 0.35s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 #custom-alert-card h3 {
-    margin-bottom: 15px;
-    font-size: 1.5rem;
-    color: #4CAF50; /* Verde per successo */
+  margin-bottom: 15px;
+  font-size: 1.5rem;
+  color: var(--success);
 }
 
 #custom-alert-card p {
-    margin-bottom: 25px;
+  margin-bottom: 25px;
+  color: var(--text-secondary);
 }
 
 #alert-close-button {
-    background-color: #f7a233;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 1rem;
-    transition: background-color 0.3s;
+  background-color: var(--primary);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: background-color 0.2s, transform 0.2s;
 }
 
 #alert-close-button:hover {
-    background-color: #DDA03D;
+  background-color: var(--primary-hover);
+  transform: scale(1.02);
 }
 
-
-/* Ombra morbida stile iOS */
-.shadow-1 {
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-}
-
-/* Card sospesa (Material Design base) */
+/* ====== SHADOWS ====== */
+.shadow-1,
 .shadow-2 {
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  box-shadow: var(--shadow-sm);
 }
 
-/* Ombra diffusa leggera */
-.shadow-3 {
-  box-shadow: 0 0 30px rgba(0,0,0,0.08);
-}
-
-/* Ombra multipla “profonda” */
+.shadow-3,
 .shadow-4 {
-  box-shadow: 
-    0 4px 6px rgba(0,0,0,0.1),
-    0 8px 20px rgba(0,0,0,0.05);
+  box-shadow: var(--shadow-md);
 }
 
-/* Ombra tipo finestra/macOS */
-.shadow-5 {
-  box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-}
-
-/* Effetto “fluttuante” */
+.shadow-5,
 .shadow-6 {
-  box-shadow: 
-    0 10px 15px rgba(0,0,0,0.1),
-    0 20px 25px rgba(0,0,0,0.05);
+  box-shadow: var(--shadow-lg);
 }
-/* Classe per animare la rotazione */
+
+/* ====== ANIMATIONS ====== */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
 .rotate-45 {
   transform: rotate(45deg);
-  transition: transform 0.3s ease-in-out; /* durata e tipo di animazione */
+  transition: transform 0.3s ease-in-out;
+}
+
+/* ====== RESPONSIVENESS DESKTOP ====== */
+@media (min-width: 768px) {
+  body {
+    padding-bottom: 20px;
+  }
+
+  #app-container {
+    margin-left: 90px;
+  }
 }

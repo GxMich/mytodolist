@@ -1,0 +1,28 @@
+{
+    "name": "TaskFlow",
+    "short_name": "TaskFlow",
+    "description": "Organizza le tue giornate con task, note, eventi e pomodoro timer",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#0D0D0D",
+    "theme_color": "#E8A849",
+    "orientation": "portrait",
+    "icons": [
+        {
+            "src": "/resorces/img/logo.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "/resorces/img/logo.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ],
+    "categories": [
+        "productivity",
+        "utilities"
+    ]
+}

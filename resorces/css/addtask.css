@@ -1,132 +1,317 @@
+/* ====== ADD TASK FORM (Liquid Glass) ====== */
 #task-form-container {
     position: fixed;
-    top: 44%;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    z-index: 200;
-    color: #1A1A1A;
-    background-color: #f6f5fa;
-    max-width: 500px;
-    width: calc(100% - 60px);
-    padding: 30px 30px;
-    min-height: 300px; 
-    overflow-y: auto; 
-    border-radius: 16px;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); 
-    transition: all 0.3s ease;
+    z-index: 300;
+    color: var(--text-primary);
+    background-color: var(--surface-solid);
+    border: 1px solid var(--border-color);
+    max-width: 460px;
+    width: calc(100% - 40px);
+    max-height: 85vh;
+    padding: 24px;
+    overflow-y: auto;
+    border-radius: 24px;
+    box-shadow: var(--shadow-lg);
+    scrollbar-width: thin;
+    animation: formIn 0.3s ease-out;
+}
+
+@keyframes formIn {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+#task-form-container::-webkit-scrollbar {
+    width: 4px;
+}
+
+#task-form-container::-webkit-scrollbar-thumb {
+    background-color: var(--text-tertiary);
+    border-radius: 4px;
 }
 
 h1 {
     font-weight: 800;
-    font-size: 1.8rem;
+    font-size: 1.5rem;
     text-align: center;
-    margin-bottom: 10px;
+    margin-bottom: 16px;
+    color: var(--text-primary);
 }
 
+/* ====== FORM SECTIONS ====== */
+.form-section {
+    margin-bottom: 14px;
+}
+
+.form-label {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* ====== SEGMENTED CONTROL (iOS Style) ====== */
+.segmented-control {
+    display: flex;
+    background-color: var(--border-color);
+    border-radius: 10px;
+    padding: 3px;
+    gap: 2px;
+}
+
+.segment {
+    flex: 1;
+    padding: 8px 0;
+    text-align: center;
+    border: none;
+    background: transparent;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.segment.active {
+    background-color: var(--surface-solid) !important;
+    color: var(--text-primary) !important;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+    border: none !important;
+}
+
+/* ====== FORM INPUT ====== */
+.form-input {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    font-size: 1rem;
+    font-family: inherit;
+    outline: none;
+    transition: border-color 0.2s ease;
+}
+
+.form-input:focus {
+    border-color: var(--primary);
+}
+
+.form-input::placeholder {
+    color: var(--text-tertiary);
+}
+
+.form-input-sm {
+    padding: 10px 12px;
+    font-size: 0.9rem;
+}
+
+/* ====== PILL SELECTOR ====== */
+.pill-selector {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.pill {
+    padding: 8px 14px;
+    border-radius: 20px;
+    border: 1px solid var(--border-color);
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: inherit;
+}
+
+.pill:hover {
+    background-color: var(--surface-hover);
+}
+
+.pill.active {
+    background-color: var(--primary) !important;
+    color: #fff !important;
+    border-color: transparent !important;
+    font-weight: 600;
+}
+
+/* ====== iOS TOGGLE SWITCH ====== */
+.toggle-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 4px 0;
+}
+
+.toggle-label {
+    font-size: 0.95rem;
+    color: var(--text-primary);
+    font-weight: 500;
+}
+
+.ios-toggle {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 30px;
+    flex-shrink: 0;
+}
+
+.ios-toggle input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.ios-toggle-slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--border-color);
+    transition: all 0.3s ease;
+    border-radius: 30px;
+}
+
+.ios-toggle-slider::before {
+    content: '';
+    position: absolute;
+    height: 24px;
+    width: 24px;
+    left: 3px;
+    bottom: 3px;
+    background-color: var(--surface-solid);
+    transition: all 0.3s ease;
+    border-radius: 50%;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.ios-toggle input:checked+.ios-toggle-slider {
+    background-color: var(--primary);
+}
+
+.ios-toggle input:checked+.ios-toggle-slider::before {
+    transform: translateX(20px);
+}
+
+/* ====== DATE/TIME ROW ====== */
+.date-time-row {
+    display: flex;
+    gap: 10px;
+}
+
+.date-time-field {
+    flex: 1;
+}
+
+/* ====== TEXTAREA ====== */
+.form-textarea {
+    width: 100%;
+    resize: none;
+    min-height: 80px;
+    padding: 12px 14px;
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    font-family: inherit;
+    font-size: 0.95rem;
+    outline: none;
+    transition: border-color 0.2s ease;
+}
+
+.form-textarea:focus {
+    border-color: var(--primary);
+}
+
+.form-textarea::placeholder {
+    color: var(--text-tertiary);
+}
+
+/* ====== SAVE BUTTON ====== */
+.save-button {
+    width: 100%;
+    padding: 14px;
+    margin-top: 8px;
+    background-color: var(--primary);
+    color: #fff;
+    border: none;
+    border-radius: 14px;
+    font-size: 1.05rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: inherit;
+}
+
+.save-button:hover {
+    background-color: var(--primary-hover);
+    transform: scale(1.01);
+}
+
+/* ====== LEGACY COMPAT (keep existing selectors working) ====== */
 .input-group {
     position: relative;
-    margin-bottom: 15px; 
+    margin-bottom: 0;
 }
 
-.input-field, .select-field {
+.input-field,
+.select-field {
     width: 100%;
-    padding: 18px 0px 6px 0px; 
-    border: none;
-    border-bottom: 2px solid #E0E0E0;
-    background-color: transparent;
-    color: #1A1A1A;
+    padding: 12px 14px;
+    border: var(--glass-border);
+    border-radius: 12px;
+    background-color: var(--surface-color);
+    color: var(--text-primary);
     font-size: 1rem;
     outline: none;
-    transition: border-bottom-color 0.3s;
-    border-radius: 0;
+    transition: border-color 0.2s;
+    font-family: inherit;
 }
 
-.input-field:focus, .select-field:focus {
-    border-bottom-color: #DDA03D;
+.input-field:focus,
+.select-field:focus {
+    border-color: var(--primary);
 }
 
-.input-field.error, .select-field.error {
-    border-bottom-color: #E53E3E !important;
+.checkbox-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+    font-size: 0.95rem;
+    color: var(--text-primary);
 }
 
-.input-group label {
-    position: absolute;
-    top: 15px;
-    left: 0px;
-    font-size: 1rem;
-    color: #A0A0A0;
-    pointer-events: none;
-    transition: all 0.2s ease-out;
-    transform-origin: left top;
-}
-
-.input-field:focus ~ label, 
-.input-field:not(:placeholder-shown) ~ label,
-.input-field[type="time"] ~ label, 
-.input-field[type="date"] ~ label,
-.select-field:focus ~ label,
-.select-field:valid ~ label {
-  top: 5px;
-  font-size: 0.75rem;
-  color: #DDA03D;
-  transform: scale(0.9);
+.checkbox-group label {
+    margin-left: 6px;
 }
 
 .time-date-group,
 .select-group {
     display: flex;
     gap: 10px;
-    margin-bottom: 20px; 
+    margin-bottom: 14px;
 }
 
 .time-date-group .input-group,
 .select-group .input-group {
     flex: 1;
-    margin-bottom: 0;
-}
-
-.checkbox-group {
-    display: flex;
-    align-items: center;
-    margin-bottom: 15px;
-    font-size: 0.95rem;
-}
-
-.checkbox-group label {
-    margin-left: 3px;
-}
-
-textarea {
-    resize: none;
-    min-height: 120px;
-    padding: 15px;
-    border: 1px solid #E0E0E0;
-    border-radius: 16px;
-    background-color: #FFFFFF;
-    color: #1A1A1A;
-    width: 100%;
-    font-family: inherit;
-    font-size: 1rem;
-    outline: none;
-    transition: border-color 0.3s;
-}
-
-.save-button {
-    width: 100%;
-    padding: 15px;
-    margin-top: 5px;
-    background-color: #DDA03D;
-    color: #000000;
-    border: none;
-    border-radius: 16px;
-    font-size: 1.1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.2s, box-shadow 0.2s;
-    box-shadow: 0 8px 15px rgba(221, 160, 61, 0.4); 
-}
-
-.save-button:hover {
-    background-color: #f7a233;
-    box-shadow: 0 6px 12px rgba(221, 160, 61, 0.3);
 }

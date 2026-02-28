@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>To-Do Hub</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo" aria-hidden="true">✓</div>
+      <div>
+        <div class="brand-title">To-Do Hub</div>
+        <div class="brand-sub">task • eventi • note • progetti • turni</div>
+      </div>
+    </div>
+
+    <div class="search">
+      <input id="q" type="search" placeholder="Cerca titolo, descrizione o tag…" />
+      <button id="clearQ" class="iconbtn" title="Svuota">×</button>
+    </div>
+
+    <div class="top-actions">
+      <button id="pingBtn" class="btn btn-ghost">Ping</button>
+      <button id="syncBtn" class="btn btn-ghost hidden">Sync</button>
+      <button id="logoutBtn" class="btn btn-ghost hidden">Logout</button>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <!-- AUTH -->
+    <section id="auth" class="panel">
+      <div class="panel-head">
+        <h1>Accesso</h1>
+        <p class="muted">Frontend statico + backend Apps Script / Google Sheet.</p>
+      </div>
+
+      <div class="tabs">
+        <button class="tab is-active" data-tab="login">Login</button>
+        <button class="tab" data-tab="register">Register</button>
+      </div>
+
+      <form id="loginForm" class="form">
+        <label class="field"><span>Email</span><input name="email" type="email" required /></label>
+        <label class="field"><span>Password</span><input name="password" type="password" required /></label>
+        <button class="btn btn-primary" type="submit">Entra</button>
+      </form>
+
+      <form id="registerForm" class="form hidden">
+        <label class="field"><span>Nome</span><input name="name" required /></label>
+        <label class="field"><span>Email</span><input name="email" type="email" required /></label>
+        <label class="field"><span>Password</span><input name="password" type="password" minlength="6" required /></label>
+        <button class="btn btn-primary" type="submit">Crea account</button>
+      </form>
+    </section>
+
+    <!-- APP -->
+    <section id="app" class="app hidden">
+      <aside class="sidebar">
+        <div class="usercard">
+          <div class="avatar" id="avatar">U</div>
+          <div class="usertext">
+            <div class="uname" id="userName">—</div>
+            <div class="uemail" id="userEmail">—</div>
+          </div>
+        </div>
+
+        <nav class="nav">
+          <button class="navbtn is-active" data-view="inbox">Inbox</button>
+          <button class="navbtn" data-view="calendar">Calendario</button>
+          <button class="navbtn" data-view="projects">Progetti</button>
+          <button class="navbtn" data-view="notes">Note</button>
+          <button class="navbtn" data-view="profile">Utente</button>
+        </nav>
+
+        <button id="newBtn" class="btn btn-primary full">+ Nuovo</button>
+      </aside>
+
+      <section class="content">
+        <div class="toolbar">
+          <div class="row">
+            <select id="filterType" class="select">
+              <option value="">Tutti</option>
+              <option value="task">Task</option>
+              <option value="event">Eventi</option>
+              <option value="note">Note</option>
+              <option value="project">Progetti</option>
+              <option value="shift">Turni</option>
+            </select>
+
+            <select id="sortBy" class="select">
+              <option value="when">Data/ora</option>
+              <option value="priority">Priorità</option>
+              <option value="urgency">Urgenza</option>
+              <option value="updated">Aggiornati</option>
+            </select>
+
+            <input id="tagFilter" class="input" placeholder="Filtro tag (es: lavoro)" />
+            <button id="applyTag" class="btn btn-ghost">Applica</button>
+          </div>
+
+          <div class="row">
+            <label class="small">Da <input id="fromDate" type="date" class="input" /></label>
+            <label class="small">A <input id="toDate" type="date" class="input" /></label>
+            <button id="applyRange" class="btn btn-ghost">Range</button>
+            <button id="todayBtn" class="btn btn-ghost">Oggi</button>
+          </div>
+        </div>
+
+        <section id="view-inbox" class="view">
+          <div id="list" class="list"></div>
+          <div id="empty" class="empty hidden">Niente da mostrare.</div>
+        </section>
+
+        <section id="view-calendar" class="view hidden">
+          <div class="calhead">
+            <button id="prevMonth" class="btn btn-ghost">‹</button>
+            <div id="monthLabel" class="caltitle">—</div>
+            <button id="nextMonth" class="btn btn-ghost">›</button>
+          </div>
+          <div id="calendar" class="calendar"></div>
+
+          <div id="dayBox" class="daybox hidden">
+            <div class="daybox-head">
+              <div id="dayTitle" class="daytitle">—</div>
+              <button id="closeDay" class="iconbtn">×</button>
+            </div>
+            <div id="dayList" class="list"></div>
+          </div>
+        </section>
+
+        <section id="view-projects" class="view hidden">
+          <div id="projects" class="grid"></div>
+        </section>
+
+        <section id="view-notes" class="view hidden">
+          <div id="notes" class="grid"></div>
+        </section>
+
+        <section id="view-profile" class="view hidden">
+          <div class="panel inner">
+            <h2>Profilo</h2>
+            <div class="form">
+              <label class="field"><span>Nome</span><input id="profileName" /></label>
+              <label class="field"><span>Email</span><input id="profileEmail" disabled /></label>
+              <button id="saveProfile" class="btn btn-primary">Salva</button>
+            </div>
+          </div>
+        </section>
+      </section>
+    </section>
+  </main>
+
+  <!-- MODAL -->
+  <div id="modal" class="modal hidden" role="dialog" aria-modal="true">
+    <div class="modal-card">
+      <div class="modal-head">
+        <div id="modalTitle" class="modaltitle">Nuovo</div>
+        <button id="closeModal" class="iconbtn">×</button>
+      </div>
+
+      <form id="itemForm" class="form">
+        <div class="row2">
+          <label class="field">
+            <span>Tipo</span>
+            <select id="fType" class="select">
+              <option value="task">Task</option>
+              <option value="event">Evento</option>
+              <option value="note">Nota</option>
+              <option value="project">Progetto</option>
+              <option value="shift">Turno</option>
+            </select>
+          </label>
+          <label class="field">
+            <span>Status</span>
+            <select id="fStatus" class="select"></select>
+          </label>
+        </div>
+
+        <label class="field"><span>Titolo</span><input id="fTitle" required /></label>
+        <label class="field"><span>Descrizione</span><textarea id="fDesc" rows="3"></textarea></label>
+
+        <div class="row2" id="timeRow">
+          <label class="field"><span>Inizio</span><input id="fStart" type="datetime-local" /></label>
+          <label class="field"><span>Fine</span><input id="fEnd" type="datetime-local" /></label>
+        </div>
+
+        <div class="row2">
+          <label class="field"><span>Priorità (1–5)</span><input id="fPriority" type="range" min="1" max="5" value="3" /></label>
+          <label class="field"><span>Urgente</span>
+            <select id="fUrgency" class="select">
+              <option value="false">No</option>
+              <option value="true">Sì</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="row2">
+          <label class="field"><span>Tag (virgola)</span><input id="fTags" placeholder="lavoro, casa, studio" /></label>
+          <label class="field"><span>Progetto</span><select id="fProjectId" class="select"></select></label>
+        </div>
+
+        <div class="row end">
+          <button id="deleteBtn" type="button" class="btn btn-danger hidden">Elimina</button>
+          <button type="submit" class="btn btn-primary">Salva</button>
+        </div>
+
+        <input id="fItemId" type="hidden" />
+        <input id="fCreatedAt" type="hidden" />
+      </form>
+    </div>
+  </div>
+
+  <!-- LOADING OVERLAY -->
+  <div id="loading" class="loading hidden" aria-live="polite" aria-busy="true">
+    <div class="spinner"></div>
+    <div class="loading-text" id="loadingText">Caricamento…</div>
+  </div>
+
+  <div id="toast" class="toast hidden"></div>
+
+  <script src="./app.js"></script>
+</body>
+</html>

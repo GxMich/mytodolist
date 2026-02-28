@@ -1,7 +1,21 @@
-<div>
-    <h2>Calendar</h2>
-    <div>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium, deserunt! Cupiditate quasi, ratione similique, saepe assumenda iure at accusantium velit deleniti aperiam ad doloremque est voluptates, praesentium omnis blanditiis pariatur.</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde asperiores enim magni eos aspernatur tempora animi consectetur corrupti a similique? Molestias explicabo iure iusto quia illo labore odio, ea neque?</p>
+<div class="calendar-container">
+    <div class="calendar-wrapper">
+        <div class="calendar-view">
+            <div class="calendar-header">
+                <button class="calendar-nav-btn" id="prevMonth"><svg xmlns="http://www.w3.org/2000/svg" width="20"
+                        height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="15 18 9 12 15 6"></polyline>
+                    </svg></button>
+                <h2 id="calendarTitle">Febbraio 2026</h2>
+                <button class="calendar-nav-btn" id="nextMonth"><svg xmlns="http://www.w3.org/2000/svg" width="20"
+                        height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg></button>
+            </div>
+            <div class="calendar-grid" id="calendarGrid"></div>
+        </div>
+        <div class="calendar-day-tasks" id="calendarTasks"></div>
     </div>
 </div>

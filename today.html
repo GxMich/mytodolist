@@ -1,8 +1,73 @@
+<!-- Status filters -->
 <div id="filter">
-  <div id="all" class="filter-card shadow-4 not-select">All</div>
-  <div id="pending" class="filter-card shadow-4 not-select">Pending</div>
-  <div id="close" class="filter-card shadow-4 not-select">Close</div>
-  <div id="priority" class="filter-card shadow-4 not-select">Priority</div>
-  <div id="expired" class="filter-card shadow-4 not-select">Expired</div>
-  <div id="deleted" class="filter-card shadow-4 not-select">Deleted</div>
+  <div id="all" class="filter-card shadow-4 not-select">
+    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="3" y="3" width="7" height="7" />
+      <rect x="14" y="3" width="7" height="7" />
+      <rect x="3" y="14" width="7" height="7" />
+      <rect x="14" y="14" width="7" height="7" />
+    </svg>
+    Tutte
+  </div>
+  <div id="pending" class="filter-card shadow-4 not-select">
+    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="10" />
+      <polyline points="12 6 12 12 16 14" />
+    </svg>
+    In corso
+  </div>
+  <div id="completed" class="filter-card shadow-4 not-select">
+    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+      <polyline points="22 4 12 14.01 9 11.01" />
+    </svg>
+    Completate
+  </div>
+  <div id="expired" class="filter-card shadow-4 not-select">
+    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="10" />
+      <line x1="12" y1="8" x2="12" y2="12" />
+      <line x1="12" y1="16" x2="12.01" y2="16" />
+    </svg>
+    Scadute
+  </div>
+  <div id="deleted" class="filter-card shadow-4 not-select">
+    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="3 6 5 6 21 6" />
+      <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+    </svg>
+    Cestino
+  </div>
 </div>
+
+<!-- Category / Tag filters -->
+<div id="category-filter">
+  <div id="cat-all" class="cat-chip active not-select">Tutto</div>
+  <div id="cat-lavoro" class="cat-chip not-select" data-tag="lavoro">
+    <span class="cat-dot" style="background:#4A90D9;"></span> Lavoro
+  </div>
+  <div id="cat-personale" class="cat-chip not-select" data-tag="personale">
+    <span class="cat-dot" style="background:#50C878;"></span> Personale
+  </div>
+  <div id="cat-studio" class="cat-chip not-select" data-tag="studio">
+    <span class="cat-dot" style="background:#9B59B6;"></span> Studio
+  </div>
+  <div id="cat-urgente" class="cat-chip cat-urgent not-select" data-urgency="alta">
+    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
+      <line x1="12" y1="9" x2="12" y2="13" />
+      <line x1="12" y1="17" x2="12.01" y2="17" />
+    </svg>
+    Urgenti
+  </div>
+</div>
+
+<div id="upcoming-widget" class="upcoming-widget"></div>
+<div id="today-summary" class="today-summary"></div>
+<div id="task-list"></div>
