@@ -31,6 +31,29 @@ async function checkAuthAndLoadApp() {
                 userNameEl.textContent = data.user.username;
             }
 
+            // Mostra foto profilo nell'header
+            const headerAvatar = document.getElementById('header-avatar');
+            const headerAvatarIcon = document.getElementById('header-avatar-icon');
+            const headerImg = document.getElementById('intro-info-img');
+            if (headerAvatar && data.user) {
+                if (data.user.photo_url) {
+                    headerImg.src = data.user.photo_url + '?t=' + Date.now();
+                    headerImg.classList.remove('hide');
+                    if (headerAvatarIcon) headerAvatarIcon.style.display = 'none';
+                } else {
+                    headerImg.src = '';
+                    headerImg.classList.add('hide');
+                    if (headerAvatarIcon) headerAvatarIcon.style.display = '';
+                }
+                // Cliccabile per andare alle impostazioni
+                headerAvatar.addEventListener('click', () => {
+                    if (typeof setMainSelection === 'function' && typeof getMainSelection === 'function') {
+                        setMainSelection('setting');
+                        getMainSelection();
+                    }
+                });
+            }
+
             // Saluto dinamico basato sull'ora
             const greetingEl = document.getElementById('greeting');
             if (greetingEl) {

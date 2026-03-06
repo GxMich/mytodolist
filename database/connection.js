@@ -5,22 +5,27 @@ let connection;
 
 // Railway fornisce MYSQL_URL come connection string completa
 if (process.env.MYSQL_URL) {
-    connection = mysql.createConnection(process.env.MYSQL_URL);
+    connection = mysql.createPool(process.env.MYSQL_URL);
 } else {
-    connection = mysql.createConnection({
+    connection = mysql.createPool({
         host: process.env.DB_HOST,
-        user: process.env.DB_USER,
-        password: process.env.DB_PASSWORD,
-        database: process.env.DB_DATABASE
+        user: (process.env.DB_USER || 'root').trim(),
+        password: process.env.DB_PASSWORD || '',
+        database: process.env.DB_DATABASE,
+        waitForConnections: true,
+        connectionLimit: 10,
+        queueLimit: 0
     });
 }
 
-connection.connect(err => {
+// Test connessione all'avvio
+connection.getConnection((err, conn) => {
     if (err) {
-        console.error('⚠️ Errore di connessione a MySQL:', err.stack);
+        console.error('⚠️ Errore di connessione a MySQL:', err.message);
         return;
     }
-    console.log('✅ Connesso al database MySQL con ID:', connection.threadId);
+    console.log('✅ Connesso al database MySQL (pool)');
+    conn.release();
 });
 
 module.exports = connection;

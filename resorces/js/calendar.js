@@ -35,28 +35,23 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-let calendarInitialized = false;
-
 async function initCalendar() {
-    if (!calendarInitialized) {
-        const prevBtn = document.getElementById('prevMonth');
-        const nextBtn = document.getElementById('nextMonth');
+    const prevBtn = document.getElementById('prevMonth');
+    const nextBtn = document.getElementById('nextMonth');
 
-        if (prevBtn) {
-            prevBtn.addEventListener('click', () => {
-                currentMonth--;
-                if (currentMonth < 0) { currentMonth = 11; currentYear--; }
-                renderCalendar();
-            });
-        }
-        if (nextBtn) {
-            nextBtn.addEventListener('click', () => {
-                currentMonth++;
-                if (currentMonth > 11) { currentMonth = 0; currentYear++; }
-                renderCalendar();
-            });
-        }
-        calendarInitialized = true;
+    if (prevBtn) {
+        prevBtn.addEventListener('click', () => {
+            currentMonth--;
+            if (currentMonth < 0) { currentMonth = 11; currentYear--; }
+            renderCalendar();
+        });
+    }
+    if (nextBtn) {
+        nextBtn.addEventListener('click', () => {
+            currentMonth++;
+            if (currentMonth > 11) { currentMonth = 0; currentYear++; }
+            renderCalendar();
+        });
     }
 
     await loadCalendarTasks();

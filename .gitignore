@@ -4,3 +4,6 @@
 # File di ambiente e configurazioni sensibili
 .env
 .DS_Store
+
+# Upload utenti
+/uploads

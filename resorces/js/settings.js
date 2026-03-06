@@ -26,6 +26,45 @@ async function initSettings() {
     const settingsForm = document.getElementById('settingsForm');
     const settingsMessage = document.getElementById('settingsMessage');
 
+    // Avatar elements
+    const avatarWrapper = document.getElementById('avatar-wrapper');
+    const avatarInput = document.getElementById('avatar-input');
+    const avatarImg = document.getElementById('avatar-img');
+    const avatarInitials = document.getElementById('avatar-initials');
+    const removeAvatarBtn = document.getElementById('remove-avatar-btn');
+
+    // Helper: update avatar display
+    function setAvatarDisplay(photoUrl, username) {
+        if (photoUrl) {
+            avatarImg.src = photoUrl + '?t=' + Date.now();
+            avatarImg.classList.remove('hide');
+            if (avatarInitials) avatarInitials.style.display = 'none';
+            if (removeAvatarBtn) removeAvatarBtn.classList.remove('hide');
+        } else {
+            avatarImg.classList.add('hide');
+            avatarImg.src = '';
+            if (avatarInitials) {
+                avatarInitials.style.display = '';
+                avatarInitials.textContent = username ? username.charAt(0).toUpperCase() : '?';
+            }
+            if (removeAvatarBtn) removeAvatarBtn.classList.add('hide');
+        }
+        // Sync header image
+        const headerImg = document.getElementById('intro-info-img');
+        const headerAvatarIcon = document.getElementById('header-avatar-icon');
+        if (headerImg) {
+            if (photoUrl) {
+                headerImg.src = photoUrl + '?t=' + Date.now();
+                headerImg.classList.remove('hide');
+                if (headerAvatarIcon) headerAvatarIcon.style.display = 'none';
+            } else {
+                headerImg.src = '';
+                headerImg.classList.add('hide');
+                if (headerAvatarIcon) headerAvatarIcon.style.display = '';
+            }
+        }
+    }
+
     // Carica info utente
     try {
         const response = await fetch('/api/me');
@@ -39,9 +78,56 @@ async function initSettings() {
             // Update header too
             const userNameEl = document.getElementById('user-name');
             if (userNameEl) userNameEl.textContent = data.user.username;
+
+            // Set avatar
+            setAvatarDisplay(data.user.photo_url, data.user.username);
         }
     } catch (error) {
         console.error('Errore caricamento info utente:', error);
+    }
+
+    // Avatar click → file picker
+    if (avatarWrapper && avatarInput) {
+        avatarWrapper.addEventListener('click', () => avatarInput.click());
+        avatarInput.addEventListener('change', async () => {
+            const file = avatarInput.files[0];
+            if (!file) return;
+            if (file.size > 5 * 1024 * 1024) {
+                if (typeof showCustomAlert === 'function') showCustomAlert('Errore', 'Immagine troppo grande (max 5MB).');
+                return;
+            }
+            const formData = new FormData();
+            formData.append('avatar', file);
+            try {
+                const res = await fetch('/api/auth/avatar', { method: 'POST', body: formData });
+                const result = await res.json();
+                if (res.ok) {
+                    setAvatarDisplay(result.photo_url, document.getElementById('profile-username')?.textContent);
+                    if (typeof showCustomAlert === 'function') showCustomAlert('Fatto!', 'Foto profilo aggiornata.');
+                } else {
+                    if (typeof showCustomAlert === 'function') showCustomAlert('Errore', result.error || 'Errore upload.');
+                }
+            } catch (err) {
+                console.error('Errore upload avatar:', err);
+            }
+            avatarInput.value = '';
+        });
+    }
+
+    // Remove avatar
+    if (removeAvatarBtn) {
+        removeAvatarBtn.addEventListener('click', async (e) => {
+            e.stopPropagation();
+            try {
+                const res = await fetch('/api/auth/avatar', { method: 'DELETE' });
+                if (res.ok) {
+                    setAvatarDisplay(null, document.getElementById('profile-username')?.textContent);
+                    if (typeof showCustomAlert === 'function') showCustomAlert('Fatto!', 'Foto rimossa.');
+                }
+            } catch (err) {
+                console.error('Errore rimozione avatar:', err);
+            }
+        });
     }
 
     // Load weekly stats

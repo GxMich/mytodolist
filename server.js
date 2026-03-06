@@ -1,16 +1,46 @@
 require('dotenv').config();
 const express = require('express');
 const path = require('path');
+const fs = require('fs');
 const cookieParser = require('cookie-parser');
 const jwt = require('jsonwebtoken');
+const multer = require('multer');
 const app = express();
 require('./database/connection');
 const taskRepository = require('./database/task.repository');
 const userRepository = require('./database/user.repository');
 const PORT = process.env.PORT || 3000;
+
+// Crea cartella uploads se non esiste
+const uploadsDir = path.join(__dirname, 'uploads', 'avatars');
+if (!fs.existsSync(uploadsDir)) {
+    fs.mkdirSync(uploadsDir, { recursive: true });
+}
+
+// Configurazione multer per avatar
+const avatarStorage = multer.diskStorage({
+    destination: (req, file, cb) => cb(null, uploadsDir),
+    filename: (req, file, cb) => {
+        const ext = path.extname(file.originalname);
+        cb(null, `avatar_${req.user.id}_${Date.now()}${ext}`);
+    }
+});
+const avatarUpload = multer({
+    storage: avatarStorage,
+    limits: { fileSize: 5 * 1024 * 1024 }, // 5MB
+    fileFilter: (req, file, cb) => {
+        const allowed = /jpeg|jpg|png|gif|webp/;
+        const extOk = allowed.test(path.extname(file.originalname).toLowerCase());
+        const mimeOk = allowed.test(file.mimetype);
+        if (extOk && mimeOk) return cb(null, true);
+        cb(new Error('Solo immagini (jpg, png, gif, webp) sono accettate.'));
+    }
+});
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Middleware di autenticazione
 const authenticateToken = (req, res, next) => {
@@ -95,12 +125,12 @@ app.post('/api/auth/login', (req, res) => {
         const token = jwt.sign(
             { id: user.id, username: user.username },
             process.env.JWT_SECRET,
-            { expiresIn: '1h' }
+            { expiresIn: '7d' }
         );
         res.cookie('jwt', token, {
             httpOnly: true,
             secure: process.env.NODE_ENV === 'production',
-            maxAge: 3600000
+            maxAge: 7 * 24 * 60 * 60 * 1000 // 7 giorni
         });
         res.status(200).json({
             message: 'Accesso riuscito',
@@ -140,9 +170,70 @@ app.patch('/api/auth/update', authenticateToken, (req, res) => {
 });
 
 app.get('/api/me', authenticateToken, (req, res) => {
-    res.status(200).json({
-        isAuthenticated: true,
-        user: { id: req.user.id, username: req.user.username }
+    userRepository.getUserById(req.user.id, (err, user) => {
+        if (err) {
+            console.error('Errore recupero utente:', err);
+            return res.status(500).json({ error: 'Errore interno.' });
+        }
+        if (!user) {
+            return res.status(404).json({ error: 'Utente non trovato.' });
+        }
+        res.status(200).json({
+            isAuthenticated: true,
+            user: { id: user.id, username: user.username, photo_url: user.photo_url }
+        });
+    });
+});
+
+// ==================== AVATAR ====================
+
+app.post('/api/auth/avatar', authenticateToken, (req, res) => {
+    avatarUpload.single('avatar')(req, res, (err) => {
+        if (err) {
+            const msg = err instanceof multer.MulterError && err.code === 'LIMIT_FILE_SIZE'
+                ? 'Il file è troppo grande (max 5MB).'
+                : err.message || 'Errore durante l\'upload.';
+            return res.status(400).json({ error: msg });
+        }
+        if (!req.file) {
+            return res.status(400).json({ error: 'Nessun file selezionato.' });
+        }
+        const photoUrl = `/uploads/avatars/${req.file.filename}`;
+
+        // Rimuovi vecchia foto se esiste
+        userRepository.getUserById(req.user.id, (err2, user) => {
+            if (!err2 && user && user.photo_url) {
+                const oldPath = path.join(__dirname, user.photo_url);
+                if (fs.existsSync(oldPath)) fs.unlinkSync(oldPath);
+            }
+            userRepository.updatePhotoUrl(req.user.id, photoUrl, (err3) => {
+                if (err3) {
+                    console.error('Errore aggiornamento foto:', err3);
+                    return res.status(500).json({ error: 'Errore interno.' });
+                }
+                res.status(200).json({ message: 'Foto aggiornata!', photo_url: photoUrl });
+            });
+        });
+    });
+});
+
+app.delete('/api/auth/avatar', authenticateToken, (req, res) => {
+    userRepository.getUserById(req.user.id, (err, user) => {
+        if (err) {
+            console.error('Errore recupero utente:', err);
+            return res.status(500).json({ error: 'Errore interno.' });
+        }
+        if (user && user.photo_url) {
+            const filePath = path.join(__dirname, user.photo_url);
+            if (fs.existsSync(filePath)) fs.unlinkSync(filePath);
+        }
+        userRepository.updatePhotoUrl(req.user.id, null, (err2) => {
+            if (err2) {
+                console.error('Errore rimozione foto:', err2);
+                return res.status(500).json({ error: 'Errore interno.' });
+            }
+            res.status(200).json({ message: 'Foto rimossa.' });
+        });
     });
 });
 
@@ -240,6 +331,20 @@ app.use(express.static(__dirname));
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
 });
+
+// ==================== AUTO MIGRATION ====================
+const db = require('./database/connection');
+db.query(
+    "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'users' AND COLUMN_NAME = 'photo_url'",
+    (err, results) => {
+        if (!err && results.length === 0) {
+            db.query("ALTER TABLE users ADD COLUMN photo_url VARCHAR(255) DEFAULT NULL AFTER password_hash", (err2) => {
+                if (err2) console.error('⚠️ Migrazione photo_url fallita:', err2.message);
+                else console.log('✅ Colonna photo_url aggiunta alla tabella users.');
+            });
+        }
+    }
+);
 
 app.listen(PORT, () => {
     console.log(`Server avviato sulla porta ${PORT}`);

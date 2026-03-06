@@ -12,14 +12,22 @@
 
     <!-- Profile Card -->
     <div class="settings-section shadow-4" style="text-align:center;">
-        <div style="margin-bottom: 12px;">
-            <svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 24 24" fill="none"
-                stroke="var(--primary)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-                <circle cx="12" cy="7" r="4" />
-            </svg>
+        <div class="profile-avatar-wrapper" id="avatar-wrapper" title="Cambia foto profilo">
+            <div class="profile-avatar" id="profile-avatar">
+                <span class="avatar-initials" id="avatar-initials">?</span>
+                <img class="avatar-img hide" id="avatar-img" alt="Avatar" />
+            </div>
+            <div class="avatar-overlay">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" />
+                    <circle cx="12" cy="13" r="4" />
+                </svg>
+            </div>
+            <input type="file" id="avatar-input" accept="image/jpeg,image/png,image/gif,image/webp" class="hide" />
         </div>
-        <h3 id="profile-username" style="font-size: 1.3rem; color: var(--text-primary);">...</h3>
+        <button id="remove-avatar-btn" class="remove-avatar-btn hide" type="button">Rimuovi foto</button>
+        <h3 id="profile-username" style="font-size: 1.3rem; color: var(--text-primary); margin-top: 10px;">...</h3>
         <p id="profile-id" style="font-size: 0.8rem; color: var(--text-tertiary); margin-top: 2px;">ID: ...</p>
     </div>
 
