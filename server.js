@@ -110,7 +110,7 @@ app.get('/api/auth/check-username/:username', (req, res) => {
 });
 
 app.post('/api/auth/login', (req, res) => {
-    const { credenziale, password } = req.body;
+    const { credenziale, password, rememberMe } = req.body;
     if (!credenziale || !password) {
         return res.status(400).json({ error: 'Credenziali incomplete.' });
     }
@@ -122,16 +122,26 @@ app.post('/api/auth/login', (req, res) => {
         if (!user) {
             return res.status(401).json({ error: 'Credenziali non valide.' });
         }
+
+        // rememberMe → JWT e cookie a 7 giorni; altrimenti sessione (chiude col browser)
+        const tokenExpiry = rememberMe ? '7d' : '1d';
         const token = jwt.sign(
             { id: user.id, username: user.username },
             process.env.JWT_SECRET,
-            { expiresIn: '7d' }
+            { expiresIn: tokenExpiry }
         );
-        res.cookie('jwt', token, {
+
+        const cookieOptions = {
             httpOnly: true,
             secure: process.env.NODE_ENV === 'production',
-            maxAge: 7 * 24 * 60 * 60 * 1000 // 7 giorni
-        });
+            sameSite: 'Lax'
+        };
+        if (rememberMe) {
+            cookieOptions.maxAge = 7 * 24 * 60 * 60 * 1000; // 7 giorni in ms
+        }
+        // Se rememberMe è false non settiamo maxAge → session cookie
+
+        res.cookie('jwt', token, cookieOptions);
         res.status(200).json({
             message: 'Accesso riuscito',
             user: { id: user.id, username: user.username }

@@ -230,12 +230,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const credenziale = loginForm.elements['loginCredenziale'].value;
         const password = loginForm.elements['loginPassword'].value;
+        const rememberMe = document.getElementById('rememberMe')?.checked ?? false;
 
         try {
             const response = await fetch('/api/auth/login', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ credenziale, password })
+                body: JSON.stringify({ credenziale, password, rememberMe })
             });
 
             const responseData = await response.json();
