@@ -3,14 +3,19 @@ let calendarTasks = [];
 let currentMonth = new Date().getMonth();
 let currentYear = new Date().getFullYear();
 let selectedDate = null;
+let calendarInitialized = false;
 
 function startCalendarObserver() {
     const main = document.querySelector("main");
+    if (!main) return;
     const observer = new MutationObserver(() => {
         const calGrid = document.getElementById("calendarGrid");
         if (calGrid) {
             observer.disconnect();
-            initCalendar();
+            if (!calendarInitialized) {
+                calendarInitialized = true;
+                initCalendar();
+            }
         }
     });
     observer.observe(main, { childList: true, subtree: true });
@@ -21,6 +26,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const originalGetMainSelection = getMainSelection;
     const wrapped = window.getMainSelection;
     window.getMainSelection = function (...args) {
+        // Reset flag so calendar re-initializes when section is re-entered
+        calendarInitialized = false;
         const result = (wrapped || originalGetMainSelection).apply(this, args);
         setTimeout(startCalendarObserver, 100);
         return result;

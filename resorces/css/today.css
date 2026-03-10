@@ -503,27 +503,56 @@
 }
 
 .calendar-view {
-  background-color: var(--surface-color);
-  backdrop-filter: var(--glass-blur);
-  -webkit-backdrop-filter: var(--glass-blur);
-  border: var(--glass-border);
-  padding: 20px;
-  border-radius: 16px;
-  transition: background-color 0.4s ease;
+  background-color: var(--surface-solid);
+  border: 1px solid var(--border-color);
+  padding: 24px 20px 20px;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  transition: background-color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+/* Dark mode: subtle surface instead of pure white */
+[data-theme="dark"] .calendar-view {
+  background-color: var(--surface-solid);
+  border-color: var(--border-color);
+  box-shadow: var(--shadow-md);
 }
 
 .calendar-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 22px;
 }
 
 .calendar-header h2 {
-  font-weight: 700;
+  font-size: 1.15rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--text-primary);
+  font-family: 'Georgia', 'Times New Roman', serif;
+}
+
+/* Primary nav button class used in calendar.html */
+.calendar-nav-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-tertiary);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.calendar-nav-btn:hover {
+  background-color: var(--border-color);
   color: var(--text-primary);
 }
 
+/* Legacy alias kept for compatibility */
 .calendar-nav {
   background: none;
   border: none;
@@ -532,76 +561,112 @@
   padding: 8px;
   border-radius: 50%;
   transition: background-color 0.2s;
-  color: var(--text-primary);
+  color: var(--text-tertiary);
 }
 
 .calendar-nav:hover {
   background-color: var(--border-color);
+  color: var(--text-primary);
 }
 
 .calendar-weekdays {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   text-align: center;
-  font-size: 0.75rem;
-  font-weight: 600;
-  color: var(--text-secondary);
-  margin-bottom: 10px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  margin-bottom: 8px;
 }
 
 .calendar-grid {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  gap: 2px;
+  gap: 3px;
+}
+
+/* Day-name header cells rendered by JS inside the grid */
+.calendar-day-name {
+  text-align: center;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  padding: 4px 0 8px;
 }
 
 .calendar-day {
   text-align: center;
-  padding: 12px 4px;
   border-radius: 50%;
   cursor: pointer;
-  font-size: 0.9rem;
-  transition: all 0.2s ease;
+  font-size: 0.88rem;
+  font-weight: 400;
+  transition: background-color 0.18s ease, color 0.18s ease;
   position: relative;
   aspect-ratio: 1 / 1;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 2px;
   color: var(--text-primary);
+  margin: 1px;
 }
 
-.calendar-day:hover {
+.calendar-day:hover:not(.today):not(.selected) {
   background-color: var(--border-color);
 }
 
+/* TODAY — filled amber circle */
 .calendar-day.today {
-  background-color: transparent;
-  color: var(--primary);
-  font-weight: 800;
-  border: 2px solid var(--primary);
+  background-color: var(--primary);
+  color: #fff;
+  font-weight: 700;
+  box-shadow: 0 2px 8px var(--primary-alpha);
+  border: none;
 }
 
+[data-theme="dark"] .calendar-day.today {
+  box-shadow: 0 2px 12px rgba(232, 168, 73, 0.35);
+}
+
+/* OTHER MONTH — very faded, non-interactive */
 .calendar-day.other-month {
   color: var(--text-tertiary);
+  opacity: 0.4;
+  cursor: default;
+  pointer-events: none;
 }
 
+/* TASK DOT — small primary dot below the number */
 .calendar-day.has-tasks::after {
   content: '';
   position: absolute;
-  bottom: 6px;
-  width: 6px;
-  height: 6px;
+  bottom: 5px;
+  width: 4px;
+  height: 4px;
   border-radius: 50%;
-  background-color: var(--secondary);
+  background-color: var(--primary);
+  opacity: 0.75;
 }
 
-.calendar-day.selected {
-  background-color: var(--primary) !important;
-  color: #fff !important;
-  box-shadow: 0 4px 10px rgba(232, 168, 73, 0.4);
+/* When today also has tasks, white dot on amber */
+.calendar-day.today.has-tasks::after {
+  background-color: rgba(255, 255, 255, 0.85);
+}
+
+/* SELECTED — inverted fill (dark on light / light on dark) */
+.calendar-day.selected:not(.today) {
+  background-color: var(--text-primary) !important;
+  color: var(--surface-solid) !important;
+  font-weight: 600;
   border: none;
-  transform: none;
+}
+
+[data-theme="dark"] .calendar-day.selected:not(.today) {
+  background-color: var(--text-primary) !important;
+  color: #000 !important;
 }
 
 .calendar-day-tasks {
